@@ -14,3 +14,32 @@ close.addEventListener("click", () => {
   close.style.display = "none";
   menu.style.display = "inline";
 });
+
+// Tour carousel animation
+document.addEventListener("DOMContentLoaded", function () {
+  const container = document.querySelector(".tours");
+  const cards = document.querySelectorAll(".tour");
+
+  let currentIndex = 0;
+  const totalCards = cards.length;
+
+  function scrollToCard(index) {
+    const cardWidth = cards[0].offsetWidth;
+    container.scrollTo({
+      left: cardWidth * index,
+      behavior: "smooth",
+    });
+  }
+
+  function startCarousel() {
+    setInterval(() => {
+      currentIndex = (currentIndex + 1) % totalCards;
+      scrollToCard(currentIndex);
+    }, 1000); // change every second
+  }
+
+  // Run carousel only on mobile
+  if (window.innerWidth <= 768) {
+    startCarousel();
+  }
+});

@@ -43,7 +43,7 @@
 
 1. **Clone the repo**
    ```bash
-   git clone https://github.com/karim-kodes/natours.git
+   git clone https://github.com/karim-kodes/Natours.git
    cd natours
    ```
    npm install

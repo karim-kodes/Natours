@@ -44,7 +44,7 @@
 1. **Clone the repo**
    ```bash
    git clone https://github.com/karim-kodes/Natours.git
-   cd natours
+   cd Natours
    ```
    npm install
 2. **Install dependencies**

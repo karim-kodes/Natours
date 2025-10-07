@@ -18,33 +18,29 @@
       "2021-07-15T09:00:00.000Z",
       "2021-08-20T09:00:00.000Z"
     ],
-    "_id": "tour01",
     "name": "The Nairobi Explorer",
     "duration": 5,
     "maxGroupSize": 20,
     "difficulty": "easy",
-    "guides": ["g1", "g2"],
+    "guides": [],
     "price": 350,
     "summary": "Discover the heart of Kenya’s bustling capital and its wildlife parks.",
     "description": "A perfect city-meets-nature experience exploring Nairobi National Park, Giraffe Centre, and cultural attractions.",
     "imageCover": "Nairobi-national-park-cover.jpg",
     "locations": [
       {
-        "_id": "loc1",
         "description": "Nairobi National Park",
         "type": "Point",
         "coordinates": [36.8516, -1.3733],
         "day": 1
       },
       {
-        "_id": "loc2",
         "description": "Giraffe Centre",
         "type": "Point",
         "coordinates": [36.7766, -1.3733],
         "day": 2
       },
       {
-        "_id": "loc3",
         "description": "Karen Blixen Museum",
         "type": "Point",
         "coordinates": [36.7178, -1.3734],
@@ -67,26 +63,23 @@
       "2021-08-12T09:00:00.000Z",
       "2021-09-15T09:00:00.000Z"
     ],
-    "_id": "tour02",
     "name": "The Maasai Mara Safari",
     "duration": 7,
     "maxGroupSize": 15,
     "difficulty": "medium",
-    "guides": ["g3", "g4"],
+    "guides": [],
     "price": 1200,
     "summary": "Witness the Great Migration and experience Maasai culture.",
     "description": "Explore the world-famous Maasai Mara Reserve. Spot lions, elephants, and cheetahs, and meet the Maasai people.",
     "imageCover": "Maasai-mara-cover.jpg",
     "locations": [
       {
-        "_id": "loc4",
         "description": "Oloololo Gate",
         "type": "Point",
         "coordinates": [35.1234, -1.41],
         "day": 1
       },
       {
-        "_id": "loc5",
         "description": "Mara River",
         "type": "Point",
         "coordinates": [35.2, -1.45],
@@ -109,19 +102,17 @@
       "2021-07-20T09:00:00.000Z",
       "2021-08-22T09:00:00.000Z"
     ],
-    "_id": "tour03",
     "name": "Amboseli Elephant Adventure",
     "duration": 6,
     "maxGroupSize": 12,
     "difficulty": "medium",
-    "guides": ["g2", "g5"],
+    "guides": [],
     "price": 850,
     "summary": "See herds of elephants with Mount Kilimanjaro as the backdrop.",
     "description": "Amboseli is world-renowned for its large elephant herds and stunning views of Kilimanjaro. Perfect for photographers.",
     "imageCover": "Amboseli-cover.jpeg",
     "locations": [
       {
-        "_id": "loc6",
         "description": "Observation Hill",
         "type": "Point",
         "coordinates": [37.28, -2.67],
@@ -148,19 +139,17 @@
       "2021-06-18T09:00:00.000Z",
       "2021-07-22T09:00:00.000Z"
     ],
-    "_id": "tour04",
     "name": "Lake Naivasha Escape",
     "duration": 4,
     "maxGroupSize": 25,
     "difficulty": "easy",
-    "guides": ["g6"],
+    "guides": [],
     "price": 400,
     "summary": "Relax at Lake Naivasha and enjoy boat rides with hippos.",
     "description": "A refreshing break at Lake Naivasha with scenic boat rides, Crescent Island walk, and bird watching.",
     "imageCover": "Lake-naivasha-cover.png",
     "locations": [
       {
-        "_id": "loc7",
         "description": "Crescent Island",
         "type": "Point",
         "coordinates": [36.45, -0.78],
@@ -184,19 +173,17 @@
       "2021-08-08T09:00:00.000Z",
       "2021-09-15T09:00:00.000Z"
     ],
-    "_id": "tour05",
     "name": "Diani Beach Paradise",
     "duration": 5,
     "maxGroupSize": 30,
     "difficulty": "easy",
-    "guides": ["g7", "g8"],
+    "guides": [],
     "price": 600,
     "summary": "Enjoy white sandy beaches and turquoise waters at Diani.",
     "description": "Relax, swim, and explore the Indian Ocean paradise of Diani Beach. Perfect for honeymooners and families.",
     "imageCover": "Diani-beach-cover.jpg",
     "locations": [
       {
-        "_id": "loc8",
         "description": "Colobus Conservation",
         "type": "Point",
         "coordinates": [39.57, -4.32],
@@ -220,19 +207,17 @@
       "2021-08-10T09:00:00.000Z",
       "2021-09-12T09:00:00.000Z"
     ],
-    "_id": "tour06",
     "name": "Mount Kenya Climb",
     "duration": 8,
     "maxGroupSize": 10,
-    "difficulty": "hard",
-    "guides": ["g9", "g5"],
+    "difficulty": "difficult",
+    "guides": [],
     "price": 1500,
     "summary": "Conquer Africa’s second highest peak.",
     "description": "Challenge yourself with an expedition to climb Mount Kenya’s peaks. Stunning glaciers, alpine lakes, and adventure.",
     "imageCover": "Mount-kenya-cover.jpeg",
     "locations": [
       {
-        "_id": "loc9",
         "description": "Point Lenana",
         "type": "Point",
         "coordinates": [37.31, 0.15],
@@ -256,19 +241,17 @@
       "2021-07-15T09:00:00.000Z",
       "2021-08-25T09:00:00.000Z"
     ],
-    "_id": "tour07",
     "name": "Lamu Island Retreat",
     "duration": 6,
     "maxGroupSize": 20,
     "difficulty": "easy",
-    "guides": ["g10"],
+    "guides": [],
     "price": 700,
     "summary": "Step back in time in Lamu’s Swahili culture and pristine beaches.",
     "description": "Discover the UNESCO heritage site of Lamu Old Town, dhow sailing, and cultural immersion.",
     "imageCover": "Lamu-island-cover.jpg",
     "locations": [
       {
-        "_id": "loc10",
         "description": "Shela Beach",
         "type": "Point",
         "coordinates": [40.91, -2.28],
@@ -296,19 +279,17 @@
       "2021-08-12T09:00:00.000Z",
       "2021-09-15T09:00:00.000Z"
     ],
-    "_id": "tour08",
     "name": "Samburu Wildlife Trail",
     "duration": 5,
     "maxGroupSize": 12,
     "difficulty": "medium",
-    "guides": ["g2", "g11"],
+    "guides": [],
     "price": 900,
     "summary": "Spot unique wildlife species only found in northern Kenya.",
     "description": "Meet the Samburu people and discover Grevy’s zebra, gerenuk, and other rare species.",
     "imageCover": "Samburu-trail-cover.jpg",
     "locations": [
       {
-        "_id": "loc11",
         "description": "Ewaso Nyiro River",
         "type": "Point",
         "coordinates": [37.55, 0.62],
@@ -332,19 +313,17 @@
       "2021-06-18T09:00:00.000Z",
       "2021-07-22T09:00:00.000Z"
     ],
-    "_id": "tour09",
     "name": "Hell’s Gate Adventure",
     "duration": 3,
     "maxGroupSize": 15,
     "difficulty": "medium",
-    "guides": ["g12"],
+    "guides": [],
     "price": 300,
     "summary": "Cycle through cliffs, gorges, and geothermal wonders.",
     "description": "A thrilling adventure at Hell’s Gate with hiking, cycling, and hot springs exploration.",
     "imageCover": "Hell's-gate-cover.jpg",
     "locations": [
       {
-        "_id": "loc12",
         "description": "Fischer’s Tower",
         "type": "Point",
         "coordinates": [36.37, -0.91],
@@ -372,19 +351,17 @@
       "2021-07-20T09:00:00.000Z",
       "2021-08-18T09:00:00.000Z"
     ],
-    "_id": "tour10",
     "name": "The Tsavo Expedition",
     "duration": 8,
     "maxGroupSize": 18,
-    "difficulty": "hard",
-    "guides": ["g13", "g14"],
+    "difficulty": "difficult",
+    "guides": [],
     "price": 1100,
     "summary": "Explore the red elephants of Tsavo and vast wilderness.",
     "description": "Cover Tsavo East and West with chances to see lions, leopards, and elephants in dramatic landscapes.",
     "imageCover": "Tsavo-expedition-cover.jpg",
     "locations": [
       {
-        "_id": "loc13",
         "description": "Mzima Springs",
         "type": "Point",
         "coordinates": [38.5, -2.98],
@@ -412,19 +389,17 @@
       "2021-08-22T09:00:00.000Z",
       "2021-09-15T09:00:00.000Z"
     ],
-    "_id": "tour11",
     "name": "Lake Turkana Discovery",
     "duration": 9,
     "maxGroupSize": 15,
-    "difficulty": "hard",
-    "guides": ["g15"],
+    "difficulty": "difficult",
+    "guides": [],
     "price": 1400,
     "summary": "Journey to the Jade Sea and its remote cultures.",
     "description": "A raw and remote experience to Lake Turkana with desert treks and cultural immersion.",
     "imageCover": "Lake-turkana-cover.webp",
     "locations": [
       {
-        "_id": "loc14",
         "description": "El Molo Village",
         "type": "Point",
         "coordinates": [36.1, 3.6],
@@ -447,26 +422,23 @@
       "2021-06-22T09:00:00.000Z",
       "2021-07-25T09:00:00.000Z"
     ],
-    "_id": "tour12",
     "name": "Aberdare Highlands Safari",
     "duration": 6,
     "maxGroupSize": 14,
     "difficulty": "medium",
-    "guides": ["g16", "g8"],
+    "guides": [],
     "price": 750,
     "summary": "Explore misty forests, waterfalls, and rare wildlife of the Aberdares.",
     "description": "The Aberdare Ranges are known for their lush forests, giant waterfalls, and unique wildlife including bongos and leopards. This safari combines hiking, game drives, and lodge stays in Kenya’s hidden gem.",
     "imageCover": "Aberdare-cover.jpg",
     "locations": [
       {
-        "_id": "loc15",
         "description": "Karuru Falls",
         "type": "Point",
         "coordinates": [36.75, 0.5],
         "day": 2
       },
       {
-        "_id": "loc16",
         "description": "The Ark Lodge",
         "type": "Point",
         "coordinates": [36.72, 0.48],

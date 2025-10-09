@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const { trim } = require("validator");
+// const { trim } = require("validator");q
 
 const tourSchema = new mongoose.Schema(
   {

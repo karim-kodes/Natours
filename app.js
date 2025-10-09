@@ -1,6 +1,7 @@
 const express = require("express");
 const morgan = require("morgan");
 const tourRoutes = require("./Routes/tourRoutes");
+const userRoutes = require("./Routes/userRoutes");
 const AppError = require("./Utils/appError");
 // Initialise the app
 const app = express();
@@ -12,6 +13,7 @@ app.use(express.static(`${__dirname}/Public`));
 
 // Mount the Routes
 app.use("/api/v1/tours", tourRoutes);
+app.use("/api/v1/users", userRoutes);
 
 // Global Error handling middleware
 

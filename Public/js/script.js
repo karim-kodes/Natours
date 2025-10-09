@@ -15,7 +15,7 @@ close.addEventListener("click", () => {
   menu.style.display = "inline";
 });
 
-// Tour carousel animation
+// Tour carousel animation in MOBILE
 document.addEventListener("DOMContentLoaded", function () {
   const container = document.querySelector(".tours");
   const cards = document.querySelectorAll(".tour");
@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
     setInterval(() => {
       currentIndex = (currentIndex + 1) % totalCards;
       scrollToCard(currentIndex);
-    }, 1000); // change every second
+    }, 2000); // change every second
   }
 
   // Run carousel only on mobile

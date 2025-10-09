@@ -2,6 +2,7 @@ const fs = require("fs");
 const mongoose = require("mongoose");
 const Tour = require("../Models/tourModel");
 const dotenv = require("dotenv");
+const User = require("../Models/userModel");
 
 dotenv.config({ path: "./config.env" });
 
@@ -11,11 +12,13 @@ mongoose.connect(process.env.DATABASE).then(() => {
 
 // Read Json file
 const tours = JSON.parse(fs.readFileSync(`${__dirname}/tours.json`, "utf-8"));
+const users = JSON.parse(fs.readFileSync(`${__dirname}/users.json`, "utf-8"));
 
 // Import data into DBa
 const importData = async () => {
   try {
     await Tour.create(tours);
+    await User.create(users, { validateBeforeSave: false });
     console.log("Data successfully loaded!!");
     process.exit();
   } catch (err) {
@@ -27,6 +30,7 @@ const importData = async () => {
 const deleteData = async () => {
   try {
     await Tour.deleteMany();
+    await User.deleteMany();
     console.log("Data successfully deleted!!");
     process.exit();
   } catch (err) {
@@ -39,3 +43,5 @@ if (process.argv[2] === "--import") {
 } else if (process.argv[2] === "--delete") {
   deleteData();
 }
+
+console.log(process.argv);

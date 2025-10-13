@@ -1,0 +1,28 @@
+extends ../layouts/base.pug
+
+block content
+  .login-container
+    img(src="/Images/Natours-recent-logo.png" alt="")
+    form.form(action="")
+      .desc
+        h2 Sign in
+        p
+          | Access your account to manage bookings.
+          br
+          | Adventure begins where comfort ends.
+
+      .input-group
+        label(for="email") Email
+        input(type="email" name="email" placeholder="Your Email" autocomplete="off")
+
+      .input-group
+        label(for="password") Password
+        input(type="password" name="password" minlength="8" autocomplete="new-password")
+
+      .input-group
+        button(type="submit")
+          a(href="/sign-in") Sign In
+
+      p
+        | New to Natours?
+        a(href="/sign-up") Sign Up

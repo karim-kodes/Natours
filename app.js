@@ -1,10 +1,16 @@
 const express = require("express");
+const path = require("path");
 const morgan = require("morgan");
 const tourRoutes = require("./Routes/tourRoutes");
 const userRoutes = require("./Routes/userRoutes");
+const viewRouter = require("./Routes/viewsRoutes");
 const AppError = require("./Utils/appError");
 // Initialise the app
 const app = express();
+
+// Set Pug as the template engine
+app.set("view engine", "pug");
+app.set("views", path.join(__dirname, "Views"));
 
 // Middlewares
 app.use(morgan("dev"));
@@ -14,6 +20,7 @@ app.use(express.static(`${__dirname}/Public`));
 // Mount the Routes
 app.use("/api/v1/tours", tourRoutes);
 app.use("/api/v1/users", userRoutes);
+app.use("/", viewRouter);
 
 // Global Error handling middleware
 

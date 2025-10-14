@@ -1,7 +1,7 @@
-const AppError = require("../Utils/appError");
-const catchAsync = require("../Utils/catchAsync");
-const Tour = require("./../Models/tourModel");
-const ApiFeatures = require("../Utils/apiFeatures");
+const AppError = require("../utils/appError");
+const catchAsync = require("../utils/catchAsync");
+const Tour = require("../models/tourModel");
+const ApiFeatures = require("../utils/apiFeatures");
 const qs = require("qs");
 
 // Get all tours

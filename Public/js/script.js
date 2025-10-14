@@ -74,38 +74,53 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // === DESKTOP REVIEWS SLIDER WITH BUTTONS ===
 document.addEventListener("DOMContentLoaded", function () {
-  if (window.innerWidth > 768) {
-    const container = document.querySelector(".reviews");
-    const nextBtn = document.getElementById("next");
-    const prevBtn = document.getElementById("prev");
-    const cards = document.querySelectorAll(".review");
+  const container = document.querySelector(".reviews");
+  const cards = document.querySelectorAll(".review");
+  const nextBtn = document.getElementById("next");
+  const prevBtn = document.getElementById("prev");
 
-    const totalCards = cards.length;
-    console.log(totalCards);
-    const visibleCards = 2;
-    let index = 0;
+  let currentIndex = 0;
+  const visibleCards = 1;
+  const totalCards = cards.length;
 
-    function updateSlider() {
-      const shiftPercent = (100 / visibleCards) * index;
-      container.style.transform = `translateX(-${shiftPercent}%)`;
-    }
+  // Ensure container uses flex layout
+  container.style.display = "flex";
+  container.style.scrollBehavior = "smooth";
+  container.style.overflow = "hidden";
 
-    nextBtn.addEventListener("click", () => {
-      if (index < totalCards / visibleCards - 1) {
-        index++;
-      } else {
-        index = 0;
-      }
-      updateSlider();
-    });
+  // Get width of one card (including margin)
+  function getCardWidth() {
+    const style = getComputedStyle(cards[0]);
+    const cardWidth = cards[0].offsetWidth + parseFloat(style.marginRight);
+    return cardWidth;
+  }
 
-    prevBtn.addEventListener("click", () => {
-      if (index > 0) {
-        index--;
-      } else {
-        index = totalCards / visibleCards - 1;
-      }
-      updateSlider();
+  function scrollToCurrent() {
+    const cardWidth = getCardWidth();
+    container.scrollTo({
+      left: cardWidth * currentIndex,
+      behavior: "smooth",
     });
   }
+
+  nextBtn.addEventListener("click", () => {
+    if (currentIndex < totalCards - visibleCards) {
+      currentIndex += visibleCards; // move two at a time
+    } else {
+      currentIndex = 0; // loop back to start
+    }
+    scrollToCurrent();
+  });
+
+  prevBtn.addEventListener("click", () => {
+    if (currentIndex > 0) {
+      currentIndex -= visibleCards; // go back two cards
+    } else {
+      currentIndex = totalCards - visibleCards; // loop to end
+    }
+    scrollToCurrent();
+  });
+
+  // Optional: adjust on resize
+  window.addEventListener("resize", scrollToCurrent);
 });

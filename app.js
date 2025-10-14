@@ -4,7 +4,7 @@ const morgan = require("morgan");
 const tourRoutes = require("./Routes/tourRoutes");
 const userRoutes = require("./Routes/userRoutes");
 const viewRouter = require("./Routes/viewsRoutes");
-const AppError = require("./Utils/appError");
+const AppError = require("./utils/appError");
 // Initialise the app
 const app = express();
 

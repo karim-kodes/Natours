@@ -1,15 +1,18 @@
+// routes/userRoutes.js
 const express = require("express");
 const userController = require("../Controllers/userController");
 const authController = require("../Controllers/authController");
 
-const Router = express.Router();
+const router = express.Router();
+router.post("/signup", authController.signUp);
+router.post("/login", authController.login);
 
-// AUTHENTICATION ROUTES
-Router.route("/signup").post(authController.signUp);
-Router.route("/login").post(authController.login);
+router.route("/").get(userController.getAllUsers); // GET /api/v1/users
 
-// ADMIN ROUTES
-Router.route("/").get(userController.getAllUsers);
-Router.route("/:id").get(userController.getUser);
+router
+  .route("/:id")
+  .get(userController.getUser) // GET /api/v1/users/:id
+  .patch(userController.updateUser) // PATCH /api/v1/users/:id
+  .delete(userController.deleteUser); // DELETE /api/v1/users/:id
 
-module.exports = Router;
+module.exports = router;

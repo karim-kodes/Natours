@@ -1,33 +1,54 @@
-const User = require("../Models/userModel");
-const AppError = require("../Utils/appError");
-const catchAsync = require("../Utils/catchAsync");
+// controllers/userController.js
+const User = require("../models/userModel");
+const catchAsync = require("../utils/catchAsync");
+const AppError = require("../utils/appError");
 
+// Get all users
 exports.getAllUsers = catchAsync(async (req, res, next) => {
   const users = await User.find();
-  //   if (!users) {
-  //     return next(new AppError("There are no users in the database", 404));
-  //   }
 
   res.status(200).json({
     status: "success",
-    result: users.length,
-    data: {
-      users,
-    },
+    results: users.length,
+    data: { users },
   });
 });
 
+// Get single user by ID
 exports.getUser = catchAsync(async (req, res, next) => {
   const user = await User.findById(req.params.id);
 
-  if (!user) {
-    return next(new AppError("No document is found on this ID", 404));
-  }
+  if (!user) return next(new AppError("No user found with that ID", 404));
 
   res.status(200).json({
     status: "success",
-    data: {
-      user,
-    },
+    data: { user },
+  });
+});
+
+// Update user
+exports.updateUser = catchAsync(async (req, res, next) => {
+  const user = await User.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+    runValidators: true,
+  });
+
+  if (!user) return next(new AppError("No user found with that ID", 404));
+
+  res.status(200).json({
+    status: "success",
+    data: { user },
+  });
+});
+
+// Delete user
+exports.deleteUser = catchAsync(async (req, res, next) => {
+  const user = await User.findByIdAndDelete(req.params.id);
+
+  if (!user) return next(new AppError("No user found with that ID", 404));
+
+  res.status(204).json({
+    status: "success",
+    data: null,
   });
 });

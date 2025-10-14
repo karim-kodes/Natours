@@ -11,3 +11,9 @@ exports.getLogin = (req, res) => {
     bodyClass: "login-body",
   });
 };
+
+exports.getHomepage = (req, res) => {
+  res
+    .status(200)
+    .render("pages/Home", { title: "Natours | Explore the World" });
+};

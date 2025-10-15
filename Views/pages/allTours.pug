@@ -1,0 +1,36 @@
+extends ../layouts/layout.pug
+
+block content
+  .tours
+    each tour in tours
+      .tour
+        .top
+          img(src=`/images/Tours/${tour.imageCover}`, alt=`${tour.name} image`)
+          span.name= tour.name
+
+        .middle
+          h4 #{tour.difficulty} #{tour.duration}-day tour
+          p= tour.summary
+          .details
+            .detail
+              i.fa-solid.fa-location-dot
+              span= tour.startLocation.description
+            .detail
+              i.fa-regular.fa-calendar
+              span= tour.startDates && tour.startDates.length ? new Date(tour.startDates[0]).toDateString() : 'Upcoming'
+            .detail
+              i.fa-regular.fa-flag
+              span #{tour.locations.length} Stops
+            .detail
+              i.fa-regular.fa-user
+              span #{tour.maxGroupSize} people
+
+        .bottom
+          .left
+            p
+              span $#{tour.price}
+              |  per person
+            p
+              span #{tour.ratingsAverage}
+              |  rating (#{tour.ratingsQuantity})
+          a(href=`/tours/${tour._id}`) Details

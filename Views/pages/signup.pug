@@ -3,7 +3,7 @@ extends ../layouts/base.pug
 block content
   .login-container
     img(src="/Images/Natours-recent-logo.png" alt="")
-    form.form(action="" )
+    form.form
       .desc
         h2 Create Your Account
         p
@@ -12,25 +12,26 @@ block content
           | Manage bookings, tours, and memories all in one place.
 
       .input-group
-        label(for="email") Name
-        input(type="text" name="name" placeholder="Your Name")
+        label(for="name") Name
+        input(type="text" name="name" placeholder="Your Name" id="name")
 
       .input-group
         label(for="email") Email
-        input(type="email" name="name" placeholder="Your Email" autocomplete='off')
+        input(type="email" name="email" placeholder="Your Email" autocomplete='off' id="email")
 
       .input-group
         label(for="password") Password
-        input(type="password" name="name" minlength="8" autocomplete="new-password")
+        input(type="password" name="password" minlength="8" autocomplete="new-password" id="password")
 
       .input-group
-        label(for="password") Confirm Password
-        input(type="password" name="password" minlength="8")
+        label(for="passwordConfirm") Confirm Password
+        input(type="password" name="passwordConfirm" minlength="8" id="passwordConfirm")
 
       .input-group
-        button(type="submit")
-          a(href="/sign-up") Sign Up
+        button(type="submit") Sign Up
 
       p
         | Already have an account?
         a(href="/sign-in") Sign In
+  script(src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js")
+  script(type="module" src="/js/signup.js")

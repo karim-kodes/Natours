@@ -1,314 +1,138 @@
-doctype html
-html(lang="en")
-  head
-    meta(charset="UTF-8")
-    meta(name="viewport", content="width=device-width, initial-scale=1.0")
-    title Kenya Tours | Explore Nature
-    link(rel="stylesheet", href="/Css/Global.css")
-    link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css")
-    link(rel="icon", type="image/png", sizes="40x40", href="/Images/Natours-fav-icon-32.png")
-    script(defer, src="/js/script.js")
-  body
-    .nav-bar
-      // MOBILE NAVBAR
-      .nav-mobile
-        .top
-          .logo
-            img(src="/Images/Natours-recent-logo.png", alt="logo")
-          .menu-btns
-            span.menu
-              i.fa-solid.fa-bars#menu
-            span.close
-              i.fa-solid.fa-xmark.close#close
-        .links
-          ul
-            li.active: a(href="/") Home
-            li: a(href="/") Tours
-            li: a(href="/") About
-            li: a(href="/") Contact Us
-          .btns
-            a(href="/signup") Sign Up
-            a(href="/in") Sign In
-      // DESKTOP NAVBAR
-      .nav-desktop
-        .nav-logo
-          img(src="/images/Natours-recent-logo.png", alt="desktop-logo")
-        .nav-links
-          ul
-            li.active: a(href="/") Home
-            li: a(href="/tours") Tours
-            li: a(href="/about-us") About Us
-            li: a(href="/contact-us") Contact Us
-        .btns.desktop-btns
-          a(href="/sign-up") Sign Up
-          a(href="/sign-in") Sign In
+extends ../layouts/layout.pug
 
-    // Hero Section
-    .hero
-      .hero-container
-        .hero-text
-          h1 Explore the World. Live the Adventure.
+block content
+  // Hero Section
+  .hero
+    .hero-container
+      .hero-text
+        h1 Explore the World. Live the Adventure.
+        p
+          | Step outside the ordinary and explore tours designed for true adventurers.
+          br
+          | With 
+          span Natours
+          | , the journey is just the beginning.
+      a.cta-btn(href="/tours") Explore Our Tours
+
+  // FEATURED TOURS SECTION
+  .featured-tours
+    .text
+      span.toaster Featured Tours
+      h2 Our Featured Tours
+      p
+        | Explore our handpicked tours that showcase the best destinations and
+        | experiences Natours has to offer. Adventure, comfort, and discovery
+        | all crafted into journeys you’ll never forget.
+    .tours
+      each tour in tours
+        .tour
+          .top
+            img(src=`/images/Tours/${tour.imageCover}`, alt=`${tour.name} image`)
+            span.name= tour.name
+
+          .middle
+            h4 #{tour.difficulty} #{tour.duration}-day tour
+            p= tour.summary
+            .details
+              .detail
+                i.fa-solid.fa-location-dot
+                span= tour.startLocation.description
+              .detail
+                i.fa-regular.fa-calendar
+                span= tour.startDates[0] ? tour.startDates[0].toDateString() : 'Upcoming'
+              .detail
+                i.fa-regular.fa-flag
+                span #{tour.locations.length} Stops
+              .detail
+                i.fa-regular.fa-user
+                span #{tour.maxGroupSize} people
+
+          .bottom
+            .left
+              p
+                span $#{tour.price}
+                |  per person
+              p
+                span #{tour.ratingsAverage}
+                |  rating (#{tour.ratingsQuantity})
+            a(href=`/tours/${tour._id}`) Details
+
+  // WHY CHOOSE US SECTION
+  .why-choose-us
+    .top-text
+      span.toaster Why us
+      h2 Why Choose Us
+      p
+        | We don’t just offer tours we craft unforgettable experiences that
+        | inspire your sense of adventure, connect you with nature and culture,
+        | and transform the way you see the world.
+    .features
+      .feature
+        .top-icon
+          i.fa-solid.fa-earth-americas.icon-1
+          span 01
+        .bottom-desc
+          h3 Handpicked Adventures
           p
-            | Step outside the ordinary and explore tours designed for true adventurers.
-            br
-            | With 
-            span Natours
-            | , the journey is just the beginning.
-        a.cta-btn(href="/tours") Explore Our Tours
+            | Every tour is carefully selected for its unique experiences,
+            | breathtaking scenery, and local authenticity.
+      .feature
+        .top-icon
+          i.fa-solid.fa-user-tie.icon-2
+          span 02
+        .bottom-desc
+          h3 Expert Local Guides
+          p
+            | Our professional guides bring destinations to life, sharing
+            | stories, culture, and hidden gems only locals know.
+      .feature
+        .top-icon
+          i.fa-solid.fa-heart.icon-3
+          span 03
+        .bottom-desc
+          h3 Trusted by Thousands
+          p
+            | Join a community of happy travelers who trust Natours for quality,
+            | comfort, and unforgettable adventures.
+      .feature
+        .top-icon
+          i.fa-solid.fa-leaf.icon-4
+          span 04
+        .bottom-desc
+          h3 Eco-Friendly Travel
+          p
+            | We believe in sustainable tourism that protects nature, supports
+            | local communities, and leaves a positive impact.
 
-    // FEATURED TOURS SECTION
-    .featured-tours
-      .text
-        span.toaster Featured Tours
-        h2 Our Featured Tours
-        p
-          | Explore our handpicked tours that showcase the best destinations and
-          | experiences Natours has to offer. Adventure, comfort, and discovery
-          | all crafted into journeys you’ll never forget.
-      .tours
-        .tour
-          .top
-            img(src="/images/Tours/Aberdare-2.webp", alt="Aberdare-1 tour")
-            span.name Aberdare National Park
-          .middle
-            h4 Medium 7-day tour
-            p Exploring the jaw-dropping US east coast by foot and by boat
-            .details
-              .detail
-                i.fa-solid.fa-location-dot
-                span Miami, USA
-              .detail
-                i.fa-regular.fa-calendar
-                span June 2025
-              .detail
-                i.fa-regular.fa-flag
-                span 5 Stops
-              .detail
-                i.fa-regular.fa-user
-                span 20 people
-          .bottom
-            .left
-              p
-                span $497
-                |  per person
-              p
-                span 4.1
-                |  rating(8)
-            a(href="/single-tour") Details
-        .tour
-          .top
-            img(src="/images/Tours/Mount-kenya-1.jpg", alt="Aberdare-1 tour")
-            span.name Aberdare National Park
-          .middle
-            h4 Medium 7-day tour
-            p Exploring the jaw-dropping US east coast by foot and by boat
-            .details
-              .detail
-                i.fa-solid.fa-location-dot
-                span Miami, USA
-              .detail
-                i.fa-regular.fa-calendar
-                span June 2025
-              .detail
-                i.fa-regular.fa-flag
-                span 5 Stops
-              .detail
-                i.fa-regular.fa-user
-                span 20 people
-          .bottom
-            .left
-              p
-                span $497
-                |  per person
-              p
-                span 4.1
-                |  rating(8)
-            a(href="/single-tour") Details
-        .tour
-          .top
-            img(src="/images/Tours/Maasai-mara-1.jpg", alt="Aberdare-1 tour")
-            span.name Aberdare National Park
-          .middle
-            h4 Medium 7-day tour
-            p Exploring the jaw-dropping US east coast by foot and by boat
-            .details
-              .detail
-                i.fa-solid.fa-location-dot
-                span Miami, USA
-              .detail
-                i.fa-regular.fa-calendar
-                span June 2025
-              .detail
-                i.fa-regular.fa-flag
-                span 5 Stops
-              .detail
-                i.fa-regular.fa-user
-                span 20 people
-          .bottom
-            .left
-              p
-                span $497
-                |  per person
-              p
-                span 4.1
-                |  rating(8)
-            a(href="/single-tour") Details
-        .tour
-          .top
-            img(src="/images/Tours/Diani-beach-1.jpg", alt="Aberdare-1 tour")
-            span.name Aberdare National Park
-          .middle
-            h4 Medium 7-day tour
-            p Exploring the jaw-dropping US east coast by foot and by boat
-            .details
-              .detail
-                i.fa-solid.fa-location-dot
-                span Miami, USA
-              .detail
-                i.fa-regular.fa-calendar
-                span June 2025
-              .detail
-                i.fa-regular.fa-flag
-                span 5 Stops
-              .detail
-                i.fa-regular.fa-user
-                span 20 people
-          .bottom
-            .left
-              p
-                span $497
-                |  per person
-              p
-                span 4.1
-                |  rating(8)
-            a(href="/single-tour") Details
-
-    // WHY CHOOSE US SECTION
-    .why-choose-us
-      .top-text
-        span.toaster Why us
-        h2 Why Choose Us
-        p
-          | We don’t just offer tours we craft unforgettable experiences that
-          | inspire your sense of adventure, connect you with nature and culture,
-          | and transform the way you see the world.
-      .features
-        .feature
-          .top-icon
-            i.fa-solid.fa-earth-americas.icon-1
-            span 01
-          .bottom-desc
-            h3 Handpicked Adventures
-            p
-              | Every tour is carefully selected for its unique experiences,
-              | breathtaking scenery, and local authenticity.
-        .feature
-          .top-icon
-            i.fa-solid.fa-user-tie.icon-2
-            span 02
-          .bottom-desc
-            h3 Expert Local Guides
-            p
-              | Our professional guides bring destinations to life, sharing
-              | stories, culture, and hidden gems only locals know.
-        .feature
-          .top-icon
-            i.fa-solid.fa-heart.icon-3
-            span 03
-          .bottom-desc
-            h3 Trusted by Thousands
-            p
-              | Join a community of happy travelers who trust Natours for quality,
-              | comfort, and unforgettable adventures.
-        .feature
-          .top-icon
-            i.fa-solid.fa-leaf.icon-4
-            span 04
-          .bottom-desc
-            h3 Eco-Friendly Travel
-            p
-              | We believe in sustainable tourism that protects nature, supports
-              | local communities, and leaves a positive impact.
-
-    // TESTIMONIALS SECTION
-    .testimonials
-      span.toaster Our Testimonials
-      p.tagline
-        | Every journey with Natours is more than just a tour — it’s an adventure
-        | filled with beauty, laughter, and unforgettable moments. Hear from
-        | explorers who turned their travel dreams into reality with us.
-      .testimonial-container
-        .testimonial-text
-          h2 Don't Believe Me Check What Our Clients Think of Us
-          .btns
-            i.fa-solid.fa-arrow-left#prev
-            i.fa-solid.fa-arrow-right#next
-        .review-wrapper
-          .reviews
-            each review in [1, 2, 3, 4]
-              .review
-                .image
-                  img(src="/images/Users/use-1.jpeg", alt="")
-                .user-info
-                  h4 Mark Smith
-                  p Google inc
-                .rating
-                  p
-                    | We believe in sustainable tourism that protects nature,
-                    | supports local communities, and leaves a positive impact.
-                  .stars
-                    i.fa-solid.fa-star.rate
-                    i.fa-solid.fa-star.rate
-                    i.fa-solid.fa-star.rate
-                    i.fa-solid.fa-star.rate
-                    i.fa-solid.fa-star
-
-    // FOOTER SECTION
-    footer.footer(style="margin: 0%")
-      .footer-container
-        .footer-top
-          .top-left
-            img(src="/images/natours-footer.png", alt="footer logo")
-            span Your ultimate go on travel and tour solution
-          .top-right
-            i.fa-solid.fa-earth-africa.earth
-            .location
-              span Our Physical Offices
-              p Mombasa, Nairobi, Naivasha
-              i.fa-solid.fa-arrow-right
-        .footer-bottom
-          .footer-links
-            .footer-link
-              h4 Services
-              p Budget Tours
-              p Expert Insights
-              p Indeoendent
-              p Luxury Tours
-              p Safety Tips
-              p Tips & Tricks
-            .footer-link
-              h4 Adventures
-              p Extreme
-              p In The Air
-              p Nature & Wildlife
-              p Winter Sports
-              p Outdoor Parks
-              p Motor Sports
-            .footer-link
-              h4 Destinations
-              p Turkana
-              p Naivasha
-              p Mombasa
-              p Lamu
-              p Mt Kenya
-              p Nairobi
-          .get-in-touch
-            h4 Get In Touch
-            .contact
-              .label
-                p Let's Talk
-                i.fa-solid.fa-arrow-right
-              .email
-                .input
-                  i.fa-regular.fa-envelope
-                  input(type="email", placeholder= "Email address")
+  // TESTIMONIALS SECTION
+  .testimonials
+    span.toaster Our Testimonials
+    p.tagline
+      | Every journey with Natours is more than just a tour — it’s an adventure
+      | filled with beauty, laughter, and unforgettable moments. Hear from
+      | explorers who turned their travel dreams into reality with us.
+    .testimonial-container
+      .testimonial-text
+        h2 Don't Believe Me Check What Our Clients Think of Us
+        .btns
+          i.fa-solid.fa-arrow-left#prev
+          i.fa-solid.fa-arrow-right#next
+      .review-wrapper
+        .reviews
+          each review in [1, 2, 3, 4]
+            .review
+              .image
+                img(src="/images/Users/use-1.jpeg", alt="")
+              .user-info
+                h4 Mark Smith
+                p Google inc
+              .rating
+                p
+                  | We believe in sustainable tourism that protects nature,
+                  | supports local communities, and leaves a positive impact.
+                .stars
+                  i.fa-solid.fa-star.rate
+                  i.fa-solid.fa-star.rate
+                  i.fa-solid.fa-star.rate
+                  i.fa-solid.fa-star.rate
+                  i.fa-solid.fa-star

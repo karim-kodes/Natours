@@ -7,14 +7,25 @@ const AppError = require("../utils/appError");
 // const sendEmail = require("../utils/email"); // Uncomment when using email
 
 // Sign JWT
-const signToken = (id) =>
-  jwt.sign({ id }, process.env.JWT_SECRET, {
-    expiresIn: process.env.JWT_EXPIRES_IN,
+const signToken = (id) => {
+  return jwt.sign({ id }, process.env.JWT_SECRET, {
+    expiresIn: "90d", // should now be a clean string like '90d'
   });
+};
 
 // Create and send token
 const createSendToken = (user, statusCode, res) => {
   const token = signToken(user._id);
+
+  const cookieOptions = {
+    expires: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000),
+    httpOnly: true,
+  };
+
+  if (process.env.NODE_ENV === "production") cookieOptions.secure = true;
+
+  res.cookie("jwt", token, cookieOptions);
+
   user.password = undefined;
 
   res.status(statusCode).json({
@@ -87,6 +98,9 @@ exports.restrictTo = (...roles) => {
     next();
   };
 };
+
+// Check if user is logged in (for rendered pages)
+
 
 // FORGOT PASSWORD
 exports.forgotPassword = catchAsync(async (req, res, next) => {

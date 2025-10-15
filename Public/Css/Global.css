@@ -351,6 +351,7 @@ body {
 .detail {
   display: flex;
   align-items: center;
+  /* white-space: nowrap; */
   gap: 0.5rem;
 }
 

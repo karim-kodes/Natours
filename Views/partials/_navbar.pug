@@ -1,0 +1,35 @@
+
+.nav-bar
+    // MOBILE NAVBAR
+    .nav-mobile
+        .top
+            .logo
+                img(src="/Images/Natours-recent-logo.png", alt="logo")
+            .menu-btns
+                span.menu
+                    i.fa-solid.fa-bars#menu
+                span.close
+                    i.fa-solid.fa-xmark.close#close
+        .links
+            ul
+                li.active: a(href="/") Home
+                li: a(href="/tours") Tours
+                li: a(href="/") About
+                li: a(href="/") Contact Us
+            .btns
+                a(href="/sign-up") Sign Up
+                a(href="/sign-in") Sign In
+    // DESKTOP NAVBAR
+    .nav-desktop
+        .nav-logo
+            img(src="/Images/Natours-recent-logo.png", alt="desktop-logo")
+        .nav-links
+            ul
+                li.active: a(href="/") Home
+                li: a(href="/tours") Tours
+                li: a(href="/about-us") About Us
+                li: a(href="/contact-us") Contact Us
+
+        .btns.desktop-btns
+            a(href="/sign-up") Sign Up
+            a(href="/sign-in") Sign In

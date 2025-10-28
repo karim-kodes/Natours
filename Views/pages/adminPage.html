@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard</title>
+    <link
+      rel="stylesheet"
+      type="image/png"
+      sizes="40x40"
+      href="../../public/Images/Natours-fav-icon-32.png"
+    />
+    <link rel="stylesheet" href="../../public/Css/admin.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script defer src="../../public/js/dashboard.js"></script>
+  </head>
+  <body>
+    <div class="dashboard">
+      <div class="sidebar">
+        <ul>
+          <li class="current">
+            <i class="fa-solid fa-chart-simple"></i><span>Overview</span>
+          </li>
+          <li><i class="fa-solid fa-location-dot"></i><span>Tours</span></li>
+          <li>
+            <i class="fa-solid fa-calendar-week"></i><span>Bookings</span>
+          </li>
+          <li><i class="fa-solid fa-user"></i><span>Users</span></li>
+          <li><i class="fa-solid fa-check-to-slot"></i><span>Reviews</span></li>
+          <li><i class="fa-solid fa-gear"></i><span>Settings</span></li>
+        </ul>
+      </div>
+      <div class="main-content">
+        <div class="overview-tab">
+          <div class="top-sec">
+            <h2>Admin Dashboard</h2>
+            <div class="toggle">
+              <i class="fa-solid fa-moon dark"></i>
+              <i class="fa-solid fa-sun light"></i>
+            </div>
+          </div>
+          <div class="count-cards">
+            <div class="count-card gen-card">
+              <p>Total Tours</p>
+              <h3>125</h3>
+            </div>
+            <div class="count-card">
+              <p>Total Bookings</p>
+              <h3>490</h3>
+            </div>
+            <div class="count-card">
+              <p>Total Users</p>
+              <h3>1,250</h3>
+            </div>
+            <div class="count-card">
+              <p>Pending Bookings</p>
+              <h3>40</h3>
+            </div>
+          </div>
+          <div class="stats">
+            <div class="recent-bookings">
+              <h3>Recent Bookings</h3>
+              <table class="bookings-table" border="0">
+                <thead>
+                  <tr>
+                    <th>Tour</th>
+                    <th>User</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Maasai Mara</td>
+                    <td>Abdikarim Mohamed</td>
+                    <td>2025-10-03</td>
+                    <td><span class="confirmed">Confirmed</span></td>
+                  </tr>
+                  <tr>
+                    <td>Aberdare Adventures</td>
+                    <td>Ali Hussein</td>
+                    <td>2025-10-03</td>
+                    <td><span class="pending">Pending</span></td>
+                  </tr>
+                  <tr>
+                    <td>Mount Kenya</td>
+                    <td>John Kiranga</td>
+                    <td>2025-10-03</td>
+                    <td><span class="confirmed">Confirmed</span></td>
+                  </tr>
+                  <tr>
+                    <td>Tsavo Park</td>
+                    <td>Peter Micheal</td>
+                    <td>2025-10-03</td>
+                    <td><span class="cancelled">Cancelled</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="top-tour">
+              <h3>Top Tour</h3>
+              <img src="../../public/Images/Tours/Amboseli-3.jpg" alt="" />
+              <span class="name">The Maasai Mara Safari</span>
+              <p>Total Bookings: <span>126</span></p>
+            </div>
+            <div class="bookings">
+              <h3>Bookings</h3>
+              <canvas id="bookingsChart"></canvas>
+            </div>
+            <div class="tours-reviews">
+              <h3>Reviews</h3>
+              <canvas class="reviews-graph" id="revenueChart"></canvas>
+            </div>
+            <div class="user-growth-chart">
+              <h3>User Growth (Monthly Signups)</h3>
+              <canvas id="userGrowthChart"></canvas>
+            </div>
+          </div>
+        </div>
+        <div class="tours-tab">
+          <div class="top-sec tours-top">
+            <h2>Tours Management</h2>
+            <a href="create-tour">
+              <i class="fa-solid fa-plus"></i>
+              Add New Tour
+            </a>
+          </div>
+          <div class="actions">
+            <input type="text" placeholder="Search tour..." />
+            <div class="select">
+              <span>Sort by</span>
+              <select>
+                <option>Price</option>
+                <option>Rating</option>
+                <option>Date</option>
+              </select>
+            </div>
+          </div>
+          <div class="tours-table-sec">
+            <table class="tours-table">
+              <thead>
+                <tr>
+                  <th>Tour Name</th>
+                  <th>Duration</th>
+                  <th>Price</th>
+                  <th>Ratings</th>
+                  <th>Start Location</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <div class="cell-content">
+                      <img
+                        src="../../public/Images/Tours/Aberdare-2.webp"
+                        alt=""
+                      />
+                      <span>Maasai Mara Park</span>
+                    </div>
+                  </td>
+                  <td>5 days</td>
+                  <td>$800</td>
+                  <td>
+                    <i class="fa-solid fa-star"></i>
+                    <span>4.8</span>
+                  </td>
+                  <td>Nairobi</td>
+                  <td><span class="cancelled">Inactive</span></td>
+                  <td class="action-btns">
+                    <div class="cell-content">
+                      <button>
+                        <i class="fa-solid fa-pen"></i>
+                        <span>Edit</span>
+                      </button>
+                      <button>
+                        <i class="fa-solid fa-trash"></i>
+                        <span>Delete</span>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="cell-content">
+                      <img
+                        src="../../public/Images/Tours/Aberdare-2.webp"
+                        alt=""
+                      />
+                      <span>Maasai Mara Park</span>
+                    </div>
+                  </td>
+                  <td>5 days</td>
+                  <td>$800</td>
+                  <td>
+                    <i class="fa-solid fa-star"></i>
+                    <span>4.8</span>
+                  </td>
+                  <td>Nairobi</td>
+                  <td><span class="confirmed">Active</span></td>
+                  <td class="action-btns">
+                    <div class="cell-content">
+                      <button>
+                        <i class="fa-solid fa-pen"></i>
+                        <span>Edit</span>
+                      </button>
+                      <button>
+                        <i class="fa-solid fa-trash"></i>
+                        <span>Delete</span>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="cell-content">
+                      <img
+                        src="../../public/Images/Tours/Aberdare-2.webp"
+                        alt=""
+                      />
+                      <span>Maasai Mara Park</span>
+                    </div>
+                  </td>
+                  <td>5 days</td>
+                  <td>$800</td>
+                  <td>
+                    <i class="fa-solid fa-star"></i>
+                    <span>4.8</span>
+                  </td>
+                  <td>Nairobi</td>
+                  <td><span class="confirmed">Active</span></td>
+                  <td class="action-btns">
+                    <div class="cell-content">
+                      <button>
+                        <i class="fa-solid fa-pen"></i>
+                        <span>Edit</span>
+                      </button>
+                      <button>
+                        <i class="fa-solid fa-trash"></i>
+                        <span>Delete</span>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="cell-content">
+                      <img
+                        src="../../public/Images/Tours/Aberdare-2.webp"
+                        alt=""
+                      />
+                      <span>Maasai Mara Park</span>
+                    </div>
+                  </td>
+                  <td>5 days</td>
+                  <td>$800</td>
+                  <td>
+                    <i class="fa-solid fa-star"></i>
+                    <span>4.8</span>
+                  </td>
+                  <td>Nairobi</td>
+                  <td><span class="cancelled">Inactive</span></td>
+                  <td class="action-btns">
+                    <div class="cell-content">
+                      <button>
+                        <i class="fa-solid fa-pen"></i>
+                        <span>Edit</span>
+                      </button>
+                      <button>
+                        <i class="fa-solid fa-trash"></i>
+                        <span>Delete</span>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="cell-content">
+                      <img
+                        src="../../public/Images/Tours/Aberdare-2.webp"
+                        alt=""
+                      />
+                      <span>Maasai Mara Park</span>
+                    </div>
+                  </td>
+                  <td>5 days</td>
+                  <td>$800</td>
+                  <td>
+                    <i class="fa-solid fa-star"></i>
+                    <span>4.8</span>
+                  </td>
+                  <td>Nairobi</td>
+                  <td><span class="confirmed">Active</span></td>
+                  <td class="action-btns">
+                    <div class="cell-content">
+                      <button>
+                        <i class="fa-solid fa-pen"></i>
+                        <span>Edit</span>
+                      </button>
+                      <button>
+                        <i class="fa-solid fa-trash"></i>
+                        <span>Delete</span>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="pagination">
+              <div class="left">
+                <span>Showing 1 to 5 of 100 entries</span>
+              </div>
+              <div class="right">
+                <button>Previous</button>
+                <button class="active-btn">1</button>
+                <button>2</button>
+                <button>3</button>
+                <button>Next</button>
+              </div>
+            </div>
+          </div>
+          <div class="Top-tours">
+            <h3>Top Tours</h3>
+            <canvas id="topToursChart"></canvas>
+          </div>
+          <div class="revenue-graph">
+            <h3>User Growth (Monthly Signups)</h3>
+            <canvas id="revenue-Chart"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

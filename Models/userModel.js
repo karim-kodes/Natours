@@ -1,3 +1,4 @@
+const crypto = require("crypto");
 const mongoose = require("mongoose");
 const validator = require("validator");
 const bcrypt = require("bcrypt");
@@ -5,20 +6,28 @@ const bcrypt = require("bcrypt");
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: [true, "please provide a name "],
+    required: [true, "please provide your name"],
   },
   email: {
     type: String,
-    required: [true, "please provide an email address"],
+    required: [true, "please provide an email"],
+    unique: true,
     lowercase: true,
     validate: [validator.isEmail, "Please provide a valid email"],
   },
+  photo: String,
+  role: {
+    type: String,
+    enum: ["user", "admin", "guide"],
+    default: "user",
+  },
   password: {
     type: String,
-    required: [true, "please provide a password"],
-    minLength: 8,
+    required: [true, "Please provide a password"],
+    minlength: 8,
     select: false,
   },
+  passwordChangedAt: Date,
   passwordConfirm: {
     type: String,
     required: [true, "please confirm your password"],
@@ -26,27 +35,18 @@ const userSchema = new mongoose.Schema({
       validator: function (el) {
         return el === this.password;
       },
-      message: "Passwords are not the same!!!",
+      message: "Passwords are not the same !!!",
     },
-    select: false,
   },
-  photo: String,
-  role: {
-    type: String,
-    enum: ["user", "admin", "guide", "lead-guide"],
-    default: "user",
-  },
-
   passwordResetToken: String,
-  passwordChangedAt: Date,
   passwordResetExpires: Date,
-
   isActive: {
     type: Boolean,
     default: true,
     select: false,
   },
 });
+
 userSchema.pre("save", async function (next) {
   // ONLY RUN THIS IF PASSWORD IS MODIFIED
   if (!this.isModified("password")) return next();
@@ -106,4 +106,6 @@ userSchema.methods.createPasswordResetToken = function () {
   return resetToken;
 };
 
-module.exports = mongoose.models.User || mongoose.model("User", userSchema);
+const User = mongoose.model("User", userSchema);
+
+module.exports = User;

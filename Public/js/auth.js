@@ -7,7 +7,6 @@ export const login = async (email, password) => {
     });
 
     if (res.data.status === "success") {
-      alert("Logged in successfully!");
       location.assign("/");
     }
   } catch (err) {

@@ -1,0 +1,82 @@
+extends ../layouts/layout.pug
+
+block content
+    .about-container 
+        section.about-hero
+            video.hero-video(autoplay muted loop playsinline)
+                source(src="/images/about-hero.mp4" type="video/mp4")
+                //- Fallback text for browsers that don’t support HTML5 video
+                | Your browser does not support the video tag.
+
+            .about-hero-content
+                h1 About Natours
+                p Discover who we are, our mission, and the adventures that drive us forward.
+        section.our-story(data-aos="zoom-in" data-aos-delay="300")
+            h2 Our Story 
+            .our-story-container 
+                .our-story-left(data-aos="fade-right" data-aos-delay="400" duration="1200") 
+                    h3  About Natours
+                    p 
+                        | Founded with a passion for exploration, Natours was created to connect  
+                        br    
+                        | travelers with the most stunning destinations on Earth. Our mission is simple — 
+                        br 
+                        | to turn every journey into a story worth telling.
+                .our-story-right(data-aos="fade-left" data-aos-delay="400")  
+                    img(src="/images/Tours/aberdare-1.jpg", alt="Aberdare photo", )
+                    img(src="/images/Tours/Tsavo-expedition-1.jpg", alt="Tsavo photo")
+                    img(src="/images/Tours/diani-beach-1.jpg", alt="Tsavo photo")
+        section.mission-vision 
+            .mission(data-aos="zoom-in" data-aos-delay="300") 
+                h2 Our Mission 
+                p  To inspire adventure and promote sustainable tourism through unforgettable experiences.
+            .vision(data-aos="zoom-in" data-aos-delay="500")  
+                h2 Our Vision 
+                p  To be the world’s most trusted platform for discovering nature’s hidden gems.
+        .why-choose-us(data-aos="zoom-in" data-aos-delay="300") 
+            .top-text
+                span.toaster Why us
+                h2 Why Choose Us
+                p
+                    | We don’t just offer tours we craft unforgettable experiences that
+                    | inspire your sense of adventure, connect you with nature and culture,
+                    | and transform the way you see the world.
+            .features
+                .feature
+                    .top-icon
+                        i.fa-solid.fa-earth-americas.icon-1
+                        span 01
+                    .bottom-desc
+                        h3 Handpicked Adventures
+                        p
+                            | Every tour is carefully selected for its unique experiences,
+                            | breathtaking scenery, and local authenticity.
+                .feature
+                    .top-icon
+                        i.fa-solid.fa-user-tie.icon-2
+                        span 02
+                    .bottom-desc
+                        h3 Expert Local Guides
+                        p
+                            | Our professional guides bring destinations to life, sharing
+                            | stories, culture, and hidden gems only locals know.
+                .feature
+                    .top-icon
+                        i.fa-solid.fa-heart.icon-3
+                        span 03
+                    .bottom-desc
+                        h3 Trusted by Thousands
+                        p
+                            | Join a community of happy travelers who trust Natours for quality,
+                            | comfort, and unforgettable adventures.
+                .feature
+                    .top-icon
+                        i.fa-solid.fa-leaf.icon-4
+                        span 04
+                    .bottom-desc
+                        h3 Eco-Friendly Travel
+                        p
+                            | We believe in sustainable tourism that protects nature, supports
+                            | local communities, and leaves a positive impact.
+
+

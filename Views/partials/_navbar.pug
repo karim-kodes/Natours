@@ -25,13 +25,21 @@
             img(src="/Images/Natours-recent-logo.png", alt="desktop-logo")
         .nav-links
             ul
-                li.active: a(href="/") Home
-                li: a(href="/tours") Tours
-                li: a(href="/about-us") About Us
-                li: a(href="/contact-us") Contact Us
-
-        .btns.desktop-btns
-            a(href="/sign-up") Sign Up
-            a(href="/sign-in") Sign In
-        .user-profile 
-            p Cadnaan Mali
+                li(class=activePage === 'home' ? 'desktop-active' : '') 
+                    a(href="/") Home
+                li(class=activePage === 'tours' ? 'desktop-active' : '') 
+                    a(href="/tours") Tours
+                li(class=activePage === 'about' ? 'desktop-active' : '') 
+                    a(href="/about-us") About Us
+                li(class=activePage === 'contact' ? 'desktop-active' : '') 
+                    a(href="/contact-us") Contact Us
+        if user
+            .user-profile 
+                span= user.name.split(' ')[0]
+                a(href="/userDashboard") 
+                    img(src=`/Images/Users/${user.photo || 'Images/Users/default-profile.jpeg'}`, alt= `photo of ${user.name}`)
+        else
+            .btns.desktop-btns
+                a(href="/signUp") Sign Up
+                a(href="/login") Sign In
+            

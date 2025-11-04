@@ -124,3 +124,35 @@ document.addEventListener("DOMContentLoaded", function () {
   // Optional: adjust on resize
   window.addEventListener("resize", scrollToCurrent);
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const sortSelect = document.getElementById("sort");
+  const durationSelect = document.getElementById("duration");
+  const searchInput = document.getElementById("search");
+
+  // Restore selected values
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.has("sort")) sortSelect.value = urlParams.get("sort");
+  if (urlParams.has("duration"))
+    durationSelect.value = urlParams.get("duration");
+  if (urlParams.has("search")) searchInput.value = urlParams.get("search");
+
+  const handleFilters = () => {
+    const sort = sortSelect.value;
+    const duration = durationSelect.value;
+    const search = searchInput.value.trim();
+
+    let query = `/tours?`;
+    if (sort !== "default") query += `sort=${sort}&`;
+    if (duration !== "all") query += `duration=${duration}&`;
+    if (search) query += `search=${search}&`;
+
+    location.assign(query);
+  };
+
+  sortSelect.addEventListener("change", handleFilters);
+  durationSelect.addEventListener("change", handleFilters);
+  searchInput.addEventListener("keyup", (e) => {
+    if (e.key === "Enter") handleFilters();
+  });
+});

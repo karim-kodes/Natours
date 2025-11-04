@@ -1,36 +1,59 @@
 extends ../layouts/layout.pug
 
 block content
-  .tours
-    each tour in tours
-      .tour
-        .top
-          img(src=`/images/Tours/${tour.imageCover}`, alt=`${tour.name} image`)
-          span.name= tour.name
+    .all-tours-container 
+        section.tours-controls
+            .controls-container
+                h2.text-xl.font-bold.mb-2 Explore Tours
+                .filters
+                    select#sort
+                        option(value="default") Sort by
+                        option(value="price-asc") Price: Low to High
+                        option(value="price-desc") Price: High to Low
+                        option(value="ratings-desc") Rating: High to Low
+                    select#duration
+                        option(value="all") Duration: All
+                        option(value="short") Short (1–3 days)
+                        option(value="medium") Medium (4–7 days)
+                        option(value="long") Long (8+ days)
+                    input#search(type="text" placeholder="Search tours...")
+        .all-tours-wrapper
+            each tour in tours
+                .tour
+                    .top
+                        img(src=`/images/Tours/${tour.imageCover}`, alt=`${tour.name} image`)
+                        span.name= tour.name
 
-        .middle
-          h4 #{tour.difficulty} #{tour.duration}-day tour
-          p= tour.summary
-          .details
-            .detail
-              i.fa-solid.fa-location-dot
-              span= tour.startLocation.description
-            .detail
-              i.fa-regular.fa-calendar
-              span= tour.startDates && tour.startDates.length ? new Date(tour.startDates[0]).toDateString() : 'Upcoming'
-            .detail
-              i.fa-regular.fa-flag
-              span #{tour.locations.length} Stops
-            .detail
-              i.fa-regular.fa-user
-              span #{tour.maxGroupSize} people
+                    .middle
+                        h4 #{tour.difficulty} #{tour.duration}-day tour
+                        p= tour.summary
+                        .details
+                            .detail
+                                i.fa-solid.fa-location-dot
+                                span= tour.startLocation.description
+                            .detail
+                                i.fa-regular.fa-calendar
+                                span= tour.startDates[0] ? tour.startDates[0].toDateString() : 'Upcoming'
+                            .detail
+                                i.fa-regular.fa-flag
+                                span #{tour.locations.length} Stops
+                            .detail
+                                i.fa-regular.fa-user
+                                span #{tour.maxGroupSize} people
 
-        .bottom
-          .left
-            p
-              span $#{tour.price}
-              |  per person
-            p
-              span #{tour.ratingsAverage}
-              |  rating (#{tour.ratingsQuantity})
-          a(href=`/tours/${tour._id}`) Details
+                    .bottom
+                        .left
+                            p
+                                span $#{tour.price}
+                                |  per person
+                            p
+                            span #{tour.ratingsAverage}
+                            |  rating (#{tour.ratingsQuantity})
+                        a(href=`/tour/${tour.slug}`) Details
+        .pagination-container
+            span Page #{currentPage} of #{totalPages}
+            if currentPage > 1
+                a.btn(href=`/tours?page=${currentPage - 1}`) Previous
+            if currentPage < totalPages
+                a.btn(href=`/tours?page=${currentPage + 1}`) Next
+        

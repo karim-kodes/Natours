@@ -331,7 +331,7 @@ table tbody .cancelled {
 /* TOURS TAB SECTION ///////////// */
 
 .tours-tab {
-  display: flex;
+  display: grid;
   grid-template-columns: repeat(12, 1fr);
   gap: 1rem;
 }

@@ -1,9 +1,9 @@
 const fs = require("fs");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
+const User = require("../models/userModel");
 const Tour = require("../models/tourModel");
 const Review = require("../models/reviewModel");
-const User = require("../models/userModel");
 
 dotenv.config({ path: "./config.env" });
 
@@ -21,6 +21,20 @@ const users = JSON.parse(fs.readFileSync(`${__dirname}/users.json`, "utf-8"));
 const reviews = JSON.parse(
   fs.readFileSync(`${__dirname}/reviews.json`, "utf-8")
 );
+
+// ✅ Check that all review references exist
+const reviewIssues = reviews.filter((r) => {
+  const tourExists = tours.some((t) => t._id === r.tour);
+  const userExists = users.some((u) => u._id === r.user);
+  return !tourExists || !userExists;
+});
+
+if (reviewIssues.length > 0) {
+  console.log("⚠️ Reviews referencing missing tours or users:");
+  console.log(reviewIssues);
+} else {
+  console.log("✅ All reviews reference valid tours and users!");
+}
 
 // Importing data into database
 const importData = async () => {

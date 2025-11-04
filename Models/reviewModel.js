@@ -1,12 +1,12 @@
-const mongoose = require('mongoose');
-const Tour = require('./tourModel');
+const mongoose = require("mongoose");
+const Tour = require("./tourModel");
 // const { path } = require('../app');
 
 const reviewSchema = new mongoose.Schema(
   {
     review: {
       type: String,
-      required: [true, 'Review cannot be empty'],
+      required: [true, "Review cannot be empty"],
     },
     rating: {
       type: Number,
@@ -19,13 +19,13 @@ const reviewSchema = new mongoose.Schema(
     },
     tour: {
       type: mongoose.Schema.ObjectId,
-      ref: 'Tour',
-      required: [true, 'Review must belong to a Tour.'],
+      ref: "Tour",
+      required: [true, "Review must belong to a Tour."],
     },
     user: {
       type: mongoose.Schema.ObjectId,
-      ref: 'User',
-      required: [true, 'Review must belong to a user.'],
+      ref: "User",
+      required: [true, "Review must belong to a user."],
     },
   },
   {
@@ -38,8 +38,8 @@ reviewSchema.index({ tour: 1, user: 1 }, { unique: true });
 
 reviewSchema.pre(/^find/, function (next) {
   this.populate({
-    path: 'user',
-    select: 'name photo',
+    path: "user",
+    select: "name photo",
   });
 
   next();
@@ -53,9 +53,9 @@ reviewSchema.statics.calcAverageRatings = async function (tourId) {
     },
     {
       $group: {
-        _id: '$tour',
+        _id: "$tour",
         nRating: { $sum: 1 },
-        avgRating: { $avg: '$rating' },
+        avgRating: { $avg: "$rating" },
       },
     },
   ]);
@@ -74,7 +74,7 @@ reviewSchema.statics.calcAverageRatings = async function (tourId) {
   }
 };
 
-reviewSchema.post('save', function () {
+reviewSchema.post("save", function () {
   this.constructor.calcAverageRatings(this.tour);
 });
 
@@ -91,6 +91,5 @@ reviewSchema.post(/^findOneAnd/, async function () {
   await this.r.constructor.calcAverageRatings(this.r.tour);
 });
 // Populating reviews
-const Review = mongoose.model('Review', reviewSchema);
-
+const Review = mongoose.models.Review || mongoose.model("Review", reviewSchema);
 module.exports = Review;

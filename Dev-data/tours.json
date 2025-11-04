@@ -30,7 +30,8 @@
     ],
     "price": 350,
     "summary": "Discover the heart of Kenya’s bustling capital and its wildlife parks.",
-    "description": "A perfect city-meets-nature experience exploring Nairobi National Park, Giraffe Centre, and cultural attractions.",
+    "description": "A perfect city-meets-nature experience exploring Nairobi National Park, Giraffe Centre, and cultural attractions.\n\nDiscover the vibrant charm of Kenya’s capital as you journey through its iconic landmarks and hidden natural gems. Begin your adventure at Nairobi National Park, where wild lions and rhinos roam against the backdrop of the city skyline. Continue to the Giraffe Centre to meet the gentle giants up close, then dive into Nairobi’s rich heritage with visits to local cultural sites, art galleries, and traditional markets. This unforgettable tour perfectly blends wildlife, history, and urban exploration, offering a true taste of Kenya’s diverse spirit.",
+
     "imageCover": "Nairobi-national-park-cover.jpg",
     "locations": [
       {
@@ -76,7 +77,7 @@
     "guides": ["5c8a21d02f8fb814b56fa189", "5c8a23412f8fb814b56fa18c"],
     "price": 1200,
     "summary": "Witness the Great Migration and experience Maasai culture.",
-    "description": "Explore the world-famous Maasai Mara Reserve. Spot lions, elephants, and cheetahs, and meet the Maasai people.",
+    "description": "Explore the world-famous Maasai Mara Reserve. Spot lions, elephants, and cheetahs, and meet the Maasai people.\n\nEmbark on an unforgettable journey across the endless golden plains of the Maasai Mara, one of Africa’s most iconic wildlife destinations. Experience the thrill of spotting the Big Five in their natural habitat — from majestic lions and graceful elephants to swift cheetahs on the hunt. Beyond the wildlife, immerse yourself in the rich culture of the Maasai people, known for their vibrant traditions, colorful attire, and deep connection to the land. This adventure promises breathtaking landscapes, unforgettable encounters, and a true glimpse into Kenya’s wild heart.",
     "imageCover": "Maasai-mara-cover.jpg",
     "locations": [
       {
@@ -116,7 +117,7 @@
     "guides": ["5c8a21f22f8fb814b56fa18a", "5c8a23412f8fb814b56fa18c"],
     "price": 850,
     "summary": "See herds of elephants with Mount Kilimanjaro as the backdrop.",
-    "description": "Amboseli is world-renowned for its large elephant herds and stunning views of Kilimanjaro. Perfect for photographers.",
+    "description": "Amboseli is world-renowned for its large elephant herds and stunning views of Kilimanjaro. Perfect for photographers.\n\nJourney into the heart of Amboseli National Park, where vast savannahs unfold beneath the towering presence of Mount Kilimanjaro. Watch massive elephant herds roam freely against the snow-capped backdrop, offering some of the most breathtaking photographic moments in Africa. The park’s diverse ecosystem is also home to lions, buffaloes, giraffes, and countless bird species, making it a paradise for nature lovers and adventurers alike. Whether you’re capturing sunrise over Kilimanjaro or simply soaking in the serene beauty, Amboseli promises an unforgettable safari experience.",
     "imageCover": "Amboseli-cover.jpeg",
     "locations": [
       {
@@ -158,7 +159,7 @@
     ],
     "price": 400,
     "summary": "Relax at Lake Naivasha and enjoy boat rides with hippos.",
-    "description": "A refreshing break at Lake Naivasha with scenic boat rides, Crescent Island walk, and bird watching.",
+    "description": "A refreshing break at Lake Naivasha with scenic boat rides, Crescent Island walk, and bird watching.\n\nEscape to the tranquil shores of Lake Naivasha, a freshwater gem surrounded by lush greenery and dramatic escarpments. Glide across the calm waters on a peaceful boat ride as hippos wallow nearby and colorful birds soar overhead. Step onto Crescent Island, a private sanctuary where zebras, giraffes, and antelopes roam freely among acacia trees. Whether you’re a nature lover, photographer, or traveler seeking serenity, Lake Naivasha offers the perfect blend of relaxation, wildlife encounters, and natural beauty in the heart of Kenya’s Rift Valley.",
     "imageCover": "Lake-naivasha-cover.png",
     "locations": [
       {
@@ -193,7 +194,7 @@
     "guides": ["5c8a21f22f8fb814b56fa18a", "5c8a21d02f8fb814b56fa189"],
     "price": 600,
     "summary": "Enjoy white sandy beaches and turquoise waters at Diani.",
-    "description": "Relax, swim, and explore the Indian Ocean paradise of Diani Beach. Perfect for honeymooners and families.",
+    "description": "Relax, swim, and explore the Indian Ocean paradise of Diani Beach. Perfect for honeymooners and families.\n\nUnwind along the soft white sands and turquoise waters of Diani Beach, one of Kenya’s most stunning coastal escapes. Bask in the warm sunshine, take a refreshing dip in the clear ocean, or indulge in thrilling water sports like snorkeling, diving, and kite surfing. As the sun sets, enjoy romantic beachside dinners or lively coastal nightlife under the stars. Whether you’re seeking peace, adventure, or family fun, Diani Beach offers the perfect mix of tropical beauty, cultural charm, and unforgettable seaside memories.",
     "imageCover": "Diani-beach-cover.jpg",
     "locations": [
       {
@@ -228,7 +229,7 @@
     "guides": ["5c8a21d02f8fb814b56fa189"],
     "price": 1500,
     "summary": "Conquer Africa’s second highest peak.",
-    "description": "Challenge yourself with an expedition to climb Mount Kenya’s peaks. Stunning glaciers, alpine lakes, and adventure.",
+    "description": "Challenge yourself with an expedition to climb Mount Kenya’s peaks. Stunning glaciers, alpine lakes, and adventure.\n\nEmbark on the ultimate adventure as you scale the rugged slopes of Mount Kenya, Africa’s second-highest peak. Trek through dense forests, alpine meadows, and glacial valleys, encountering unique flora and wildlife along the way. The climb rewards you with breathtaking views of jagged peaks, shimmering glaciers, and tranquil mountain lakes. Whether you’re an experienced hiker or a passionate explorer, this expedition offers both challenge and serenity in one of Kenya’s most awe-inspiring natural wonders. Conquer the heights, embrace the journey, and create memories that will last a lifetime.",
     "imageCover": "Mount-kenya-cover.jpeg",
     "locations": [
       {
@@ -263,7 +264,7 @@
     "guides": ["5c8a201e2f8fb814b56fa186", "5c8a21f22f8fb814b56fa18a"],
     "price": 700,
     "summary": "Step back in time in Lamu’s Swahili culture and pristine beaches.",
-    "description": "Discover the UNESCO heritage site of Lamu Old Town, dhow sailing, and cultural immersion.",
+    "description": "Discover the UNESCO heritage site of Lamu Old Town, dhow sailing, and cultural immersion.\n\nStep back in time as you wander through the narrow, winding streets of Lamu Old Town, a UNESCO World Heritage Site steeped in Swahili history and charm. Admire the beautifully carved wooden doors, ancient mosques, and coral stone buildings that tell stories of centuries past. Set sail on a traditional dhow across the turquoise waters of the Indian Ocean, feeling the gentle breeze and timeless rhythm of coastal life. Immerse yourself in Lamu’s rich culture, warm hospitality, and laid-back island atmosphere — a place where tradition, beauty, and peace come together in perfect harmony.",
     "imageCover": "Lamu-island-cover.jpg",
     "locations": [
       {
@@ -306,7 +307,7 @@
     ],
     "price": 900,
     "summary": "Spot unique wildlife species only found in northern Kenya.",
-    "description": "Meet the Samburu people and discover Grevy’s zebra, gerenuk, and other rare species.",
+    "description": "Meet the Samburu people and discover Grevy’s zebra, gerenuk, and other rare species.\n\nVenture into the rugged landscapes of Samburu National Reserve, a land of dramatic beauty and cultural richness. Here, the Ewaso Nyiro River winds through arid plains, attracting unique wildlife found nowhere else — from the elegant Grevy’s zebra and long-necked gerenuk to majestic elephants and lions. Beyond the wildlife, connect with the Samburu people, known for their vibrant traditions, colorful beadwork, and deep connection to nature. This journey offers an authentic glimpse into northern Kenya’s wilderness, where culture and conservation coexist in a truly unforgettable experience.",
     "imageCover": "Samburu-trail-cover.jpg",
     "locations": [
       {
@@ -341,7 +342,7 @@
     "guides": ["5c8a201e2f8fb814b56fa186", "5c8a22c62f8fb814b56fa18b"],
     "price": 300,
     "summary": "Cycle through cliffs, gorges, and geothermal wonders.",
-    "description": "A thrilling adventure at Hell’s Gate with hiking, cycling, and hot springs exploration.",
+    "description": "A thrilling adventure at Hell’s Gate with hiking, cycling, and hot springs exploration.\n\nExperience the raw beauty and excitement of Hell’s Gate National Park, a dramatic landscape carved by volcanic activity and time. Cycle between towering cliffs and geothermal vents, then hike through scenic gorges where steam rises from the earth and wildlife roams freely. Discover natural hot springs, striking rock formations, and breathtaking viewpoints that make every step an adventure. Ideal for thrill-seekers and nature lovers, Hell’s Gate offers a perfect blend of adrenaline, relaxation, and awe-inspiring natural wonder right in the heart of the Great Rift Valley.",
     "imageCover": "Hell's-gate-cover.jpg",
     "locations": [
       {
@@ -380,7 +381,7 @@
     "guides": ["5c8a23412f8fb814b56fa18c"],
     "price": 1100,
     "summary": "Explore the red elephants of Tsavo and vast wilderness.",
-    "description": "Cover Tsavo East and West with chances to see lions, leopards, and elephants in dramatic landscapes.",
+    "description": "Cover Tsavo East and West with chances to see lions, leopards, and elephants in dramatic landscapes.\n\nEmbark on an epic safari through the vast wilderness of Tsavo East and Tsavo West National Parks, Kenya’s largest and most diverse wildlife sanctuaries. Witness herds of red-dusted elephants crossing the open plains, spot lions resting under acacia trees, and catch glimpses of elusive leopards and cheetahs. Explore striking volcanic formations, Mzima Springs’ crystal-clear waters, and breathtaking viewpoints that reveal the park’s rugged beauty. Tsavo’s untamed landscapes and abundant wildlife promise an unforgettable adventure filled with raw nature, dramatic scenery, and the true spirit of the African wild.",
     "imageCover": "Tsavo-expedition-cover.jpg",
     "locations": [
       {
@@ -423,7 +424,7 @@
     ],
     "price": 1400,
     "summary": "Journey to the Jade Sea and its remote cultures.",
-    "description": "A raw and remote experience to Lake Turkana with desert treks and cultural immersion.",
+    "description": "A raw and remote experience to Lake Turkana with desert treks and cultural immersion.\n\nJourney to the edge of Kenya’s northern frontier and discover the otherworldly beauty of Lake Turkana, the world’s largest desert lake. Trek across vast, sunbaked landscapes surrounded by volcanic formations and shimmering turquoise waters that seem to stretch endlessly. Encounter local communities such as the Turkana, El Molo, and Rendille, whose ancient traditions and resilience tell powerful stories of life in one of Africa’s harshest environments. This expedition offers a rare mix of adventure, culture, and discovery — a true escape into Kenya’s wild and untamed heart.",
     "imageCover": "Lake-turkana-cover.webp",
     "locations": [
       {
@@ -457,7 +458,7 @@
     "guides": ["5c8a22c62f8fb814b56fa18b", "5c8a22c62f8fb814b56fa18b"],
     "price": 750,
     "summary": "Explore misty forests, waterfalls, and rare wildlife of the Aberdares.",
-    "description": "The Aberdare Ranges are known for their lush forests, giant waterfalls, and unique wildlife including bongos and leopards. This safari combines hiking, game drives, and lodge stays in Kenya’s hidden gem.",
+    "description": "The Aberdare Ranges are known for their lush forests, giant waterfalls, and unique wildlife including bongos and leopards. This safari combines hiking, game drives, and lodge stays in Kenya’s hidden gem.\n\nExplore the mist-covered peaks and deep valleys of the Aberdare Ranges, one of Kenya’s most enchanting and lesser-known destinations. Wander through dense rainforests alive with birdsong, discover breathtaking waterfalls like Karuru Falls, and spot rare mountain species such as the elusive bongo antelope and the majestic leopard. Enjoy guided hikes through tranquil trails and thrilling game drives that reveal the park’s diverse ecosystems. After a day of exploration, unwind in cozy lodges surrounded by nature’s serenity. The Aberdares promise a perfect blend of adventure, relaxation, and untouched wilderness.",
     "imageCover": "Aberdare-cover.jpg",
     "locations": [
       {

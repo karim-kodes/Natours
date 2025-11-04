@@ -4,7 +4,7 @@ block content
   // Hero Section
   .hero
     .hero-container
-      .hero-text
+      .hero-text(data-aos="zoom-in" data-aos-delay="300") 
         h1 Explore the World. Live the Adventure.
         p
           | Step outside the ordinary and explore tours designed for true adventurers.
@@ -15,7 +15,7 @@ block content
       a.cta-btn(href="/tours") Explore Our Tours
 
   // FEATURED TOURS SECTION
-  .featured-tours
+  .featured-tours(data-aos="fade-up" data-aos-delay="300") 
     .text
       span.toaster Featured Tours
       h2 Our Featured Tours
@@ -55,10 +55,10 @@ block content
               p
                 span #{tour.ratingsAverage}
                 |  rating (#{tour.ratingsQuantity})
-            a(href=`/tours/${tour._id}`) Details
+            a(href=`/tour/${tour.slug}`) Details
 
   // WHY CHOOSE US SECTION
-  .why-choose-us
+  .why-choose-us(data-aos="zoom-in" data-aos-delay="300") 
     .top-text
       span.toaster Why us
       h2 Why Choose Us
@@ -105,34 +105,36 @@ block content
             | local communities, and leaves a positive impact.
 
   // TESTIMONIALS SECTION
-  .testimonials
+  .testimonials(data-aos="zoom-in" data-aos-delay="300") 
     span.toaster Our Testimonials
     p.tagline
       | Every journey with Natours is more than just a tour — it’s an adventure
       | filled with beauty, laughter, and unforgettable moments. Hear from
       | explorers who turned their travel dreams into reality with us.
     .testimonial-container
-      .testimonial-text
+      .testimonial-text(data-aos="fade-right" data-aos-delay="500") 
         h2 Don't Believe Me Check What Our Clients Think of Us
         .btns
           i.fa-solid.fa-arrow-left#prev
           i.fa-solid.fa-arrow-right#next
-      .review-wrapper
+      .review-wrapper(data-aos="fade-left" data-aos-delay="500") 
         .reviews
-          each review in [1, 2, 3, 4]
-            .review
-              .image
-                img(src="/images/Users/use-1.jpeg", alt="")
-              .user-info
-                h4 Mark Smith
-                p Google inc
-              .rating
-                p
-                  | We believe in sustainable tourism that protects nature,
-                  | supports local communities, and leaves a positive impact.
-                .stars
-                  i.fa-solid.fa-star.rate
-                  i.fa-solid.fa-star.rate
-                  i.fa-solid.fa-star.rate
-                  i.fa-solid.fa-star.rate
-                  i.fa-solid.fa-star
+          if reviews && reviews.length
+            each review in reviews
+              .review
+                .image
+                  img(src=`/images/Users/${review.user.photo || 'default-profile.jpeg'}`, alt=review.user.name)
+                .user-info
+                  h4= review.user.name 
+                  p= review.user.company || 'Traveler'
+                .rating
+                  p= review.review
+                  .stars
+                    - for(let i = 0; i < 5 ; i++)
+                      if i < review.rating
+                        i.fa-solid.fa-star.rate
+                      else
+                        i.fa-solid.fa-star
+
+
+

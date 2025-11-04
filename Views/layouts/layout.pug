@@ -1,15 +1,24 @@
 doctype html
 html(lang="en")
   head
-    meta(charset="UTF-8")
-    meta(name="viewport", content="width=device-width, initial-scale=1.0")
-    title #{title}
-    link(rel="stylesheet", href="/Css/Global.css")
-    link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css")
-    link(rel="icon", type="image/png", sizes="40x40", href="/Images/Natours-fav-icon-32.png")
+    block head
+      meta(charset="UTF-8")
+      meta(name="viewport", content="width=device-width, initial-scale=1.0")
+      title Natours | #{title}
+      link(rel="stylesheet", href="/Css/Global.css")
+      link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css")
+      link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css")
+      link(rel="icon", type="image/png", sizes="40x40", href="/Images/Natours-fav-icon-32.png")
 
   body
     include ../partials/_navbar
     block content
     include ../partials/_footer
     script(defer, src="/js/script.js")
+    script(src="/js/mapbox.js") 
+    script(src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js")
+    script.
+      AOS.init({
+        duration: 1000,   // Animation duration in ms
+        once: true        // Run animation only once
+      });

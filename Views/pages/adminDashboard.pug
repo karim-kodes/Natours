@@ -3,7 +3,7 @@ html(lang="en")
     head
         meta(charset="UTF-8")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        title Dashboard
+        title #{title}
         link(rel="stylesheet", href="/Css/admin.css")
         link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css")
         link(rel="stylesheet", href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap")
@@ -42,6 +42,7 @@ html(lang="en")
                             i.fa-solid-fa-sun.light
                     .count-cards 
                         .count-card.gen-card 
+                          if tours
                             p Total Tours 
                             h3 125
                         .count-card 
@@ -70,93 +71,7 @@ html(lang="en")
                                         td 2025-10-03 Mara 
                                         td
                                             span.confirmed Confirmed
+        //- script(src="/js/dashboard.js") 
 
 
 
-
-        <div class="overview-tab">
-          <div class="top-sec">
-            <h2>Admin Dashboard</h2>
-            <div class="toggle">
-              <i class="fa-solid fa-moon dark"></i>
-              <i class="fa-solid fa-sun light"></i>
-            </div>
-          </div>
-          <div class="count-cards">
-            <div class="count-card gen-card">
-              <p>Total Tours</p>
-              <h3>125</h3>
-            </div>
-            <div class="count-card">
-              <p>Total Bookings</p>
-              <h3>490</h3>
-            </div>
-            <div class="count-card">
-              <p>Total Users</p>
-              <h3>1,250</h3>
-            </div>
-            <div class="count-card">
-              <p>Pending Bookings</p>
-              <h3>40</h3>
-            </div>
-          </div>
-          <div class="stats">
-            <div class="recent-bookings">
-              <h3>Recent Bookings</h3>
-              <table class="bookings-table" border="0">
-                <thead>
-                  <tr>
-                    <th>Tour</th>
-                    <th>User</th>
-                    <th>Date</th>
-                    <th>Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Maasai Mara</td>
-                    <td>Abdikarim Mohamed</td>
-                    <td>2025-10-03</td>
-                    <td><span class="confirmed">Confirmed</span></td>
-                  </tr>
-                  <tr>
-                    <td>Aberdare Adventures</td>
-                    <td>Ali Hussein</td>
-                    <td>2025-10-03</td>
-                    <td><span class="pending">Pending</span></td>
-                  </tr>
-                  <tr>
-                    <td>Mount Kenya</td>
-                    <td>John Kiranga</td>
-                    <td>2025-10-03</td>
-                    <td><span class="confirmed">Confirmed</span></td>
-                  </tr>
-                  <tr>
-                    <td>Tsavo Park</td>
-                    <td>Peter Micheal</td>
-                    <td>2025-10-03</td>
-                    <td><span class="cancelled">Cancelled</span></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="top-tour">
-              <h3>Top Tour</h3>
-              <img src="../../public/Images/Tours/Amboseli-3.jpg" alt="" />
-              <span class="name">The Maasai Mara Safari</span>
-              <p>Total Bookings: <span>126</span></p>
-            </div>
-            <div class="bookings">
-              <h3>Bookings</h3>
-              <canvas id="bookingsChart"></canvas>
-            </div>
-            <div class="tours-reviews">
-              <h3>Reviews</h3>
-              <canvas class="reviews-graph" id="revenueChart"></canvas>
-            </div>
-            <div class="user-growth-chart">
-              <h3>User Growth (Monthly Signups)</h3>
-              <canvas id="userGrowthChart"></canvas>
-            </div>
-          </div>
-        </div>

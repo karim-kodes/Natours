@@ -1,0 +1,88 @@
+extends ../layouts/layout.pug
+
+block append head
+    //- script(src="/js/mapbox.js") 
+mixin reviewCard(review)
+    .review
+        .image
+            img(src=`/images/Users/${review.user.photo}`, alt=`${review.user.name}`)
+        .user-info
+            h4= review.user.name 
+            p Google Inc
+        .rating
+            p= review.review
+            .stars
+                each star in [1,2,3,4,5]
+                    i(class = `fa-solid fa-star ${review.rating >= star ? 'rate' : ""}`)
+
+mixin quickFactsCard(iconType, icon, label, text)
+    .quick-fact 
+        .fact-left 
+            i(class=`fa-${iconType} fa-${icon}`)
+            h4= label 
+        span= text
+
+block content
+    .tour-detail-container 
+        .top-hero
+            img(src=`/Images/Tours/${tour.imageCover}`, alt=`${tour.name}`)
+            .top-hero-details
+                h1.tour-name= tour.name
+                .top-hero-icons 
+                    .top-hero-icon 
+                        i.fa-solid.fa-clock
+                        span= `${tour.duration} days`
+                    .top-hero-icon 
+                        i.fa-solid.fa-location-dot
+                        span= tour.startLocation.description
+        section.description
+            .left-desc 
+                .quick-facts    
+                    h2.header-2 Quick Facts 
+                    .quick-fact-container
+                        +quickFactsCard("regular","calendar", "Next Date", `${tour.startDates[0].toDateString()}`)
+                        +quickFactsCard("solid","arrow-trend-up", "Difficulty", `${tour.difficulty}`)
+                        +quickFactsCard("regular","user", "Participants", `${tour.maxGroupSize} People`)
+                        +quickFactsCard("regular","star", "Rating", `${tour.ratingsAverage}/ 5`)
+
+                .your-guides 
+                    h2.header-2 Your Guides
+                    .your-guides-container
+                        each guide in tour.guides
+                            .guide 
+                                .guide-left 
+                                    img(src=`/images/Users/${guide.photo}`, alt=`${guide.name}`)
+                                -   if(guide.role === 'lead-guide') 
+                                    h4.header-4 Lead Guide
+                                -   if(guide.role === 'guide') 
+                                    h4.header-4 Tour Guide
+                                span= guide.name 
+            .right-desc
+                h2.header-2= `About The ${tour.name} `
+                - const paragraphs = tour.description.split('\n');
+                each p in paragraphs 
+                    p= p
+               
+        section.images
+            each img, i in tour.images
+                img(src=`/Images/Tours/${img}`, alt=`${tour.name} photo ${i + 1}`)
+        
+        section.tour-map 
+            #map(data-locations = `${JSON.stringify(tour.locations)}`)
+
+        section.tour-reviews 
+            .tour-review-conatiner 
+                each review in tour.reviews
+                    +reviewCard(review)
+
+        .tour-footer 
+            .tour-booking-container 
+                .booking-left
+                    img(src='/images/Users/user-male-1.jpeg', alt="user-phto")
+                    img(src=`/images/Tours/${tour.images[1]}`, alt="Masaai mara photo 2")
+                    img(src=`/images/Tours/${tour.images[2]}`, alt="Masaai mara photo 2")
+                .booking-center 
+                    h2 What are You Waiting For?
+                    p= `${tour.duration} days. 1 adventure. Infinite memories. Make it yours today!`
+                a.booking-cta(href="/booktour") Log in To book Tour
+                    

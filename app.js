@@ -46,6 +46,7 @@ app.use(
           "https://fonts.googleapis.com",
           "https://cdn.jsdelivr.net",
           "https://cdnjs.cloudflare.com",
+          "https://unpkg.com",
           "https://maps.googleapis.com",
           "'unsafe-inline'",
         ],
@@ -73,6 +74,12 @@ app.use(
     },
   })
 );
+
+console.log("✅ Middleware stack loaded — before routes");
+app.use((req, res, next) => {
+  console.log("➡️ Received request:", req.method, req.url);
+  next();
+});
 
 // development login
 if (process.env.NODE_ENV === "development") {
@@ -129,6 +136,13 @@ app.use("/", viewsRoutes);
 app.use("/api/v1/tours", tourRoutes);
 app.use("/api/v1/users", userRoutes);
 app.use("/api/v1/reviews", reviewRoutes);
+// app.get("/test", (req, res) => {
+//   res.send("✅ Server is responding!");
+// });
+
+app.get("/ping", (req, res) => {
+  res.send("pong");
+});
 
 app.all(/.*/, (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));

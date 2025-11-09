@@ -1,19 +1,37 @@
 const menu = document.querySelector(".menu");
 const close = document.querySelector(".close");
 const links = document.querySelector(".links");
+const profileImg = document.getElementById("profile-img");
+const profileModal = document.querySelector(".user-profile-modal");
+
+// console.log(profileModal);
+// console.log(profileImg);
+if (profileImg & profileModal) {
+  profileImg.addEventListener("mouseover", () => {
+    profileModal.style.opacity = 1;
+  });
+
+  profileImg.addEventListener("mouseout", () => {
+    setTimeout(() => {
+      profileModal.style.opacity = 0;
+    }, 1000);
+  });
+}
 
 // Adding toggle effec to display the menu
-menu.addEventListener("click", () => {
-  links.style.display = "block";
-  menu.style.display = "none";
-  close.style.display = "inline";
-});
+if (menu & close & links) {
+  menu.addEventListener("click", () => {
+    links.style.display = "block";
+    menu.style.display = "none";
+    close.style.display = "inline";
+  });
 
-close.addEventListener("click", () => {
-  links.style.display = "none";
-  close.style.display = "none";
-  menu.style.display = "inline";
-});
+  close.addEventListener("click", () => {
+    links.style.display = "none";
+    close.style.display = "none";
+    menu.style.display = "inline";
+  });
+}
 
 // Tour carousel animation in MOBILE
 document.addEventListener("DOMContentLoaded", function () {

@@ -2,6 +2,12 @@ extends ../layouts/base.pug
 
 block content
   .login-container
+    .alert-box-success 
+      i.fa-solid.fa-circle-check 
+      p.success-message Account Created Successfully
+    .alert-box-error 
+      i.fa-solid.fa-xmark 
+      p.error-message  
     img(src="/Images/Natours-recent-logo.png" alt="")
     form.form.form-signUp
       .desc
@@ -32,7 +38,7 @@ block content
 
       p
         | Already have an account?
-        a(href="/sign-in") Sign In
+        a(href="/login") Sign In
   script(type="module" src="/js/signup.js")
   
  

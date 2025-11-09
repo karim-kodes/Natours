@@ -8,7 +8,7 @@ mixin reviewCard(review)
             img(src=`/images/Users/${review.user.photo}`, alt=`${review.user.name}`)
         .user-info
             h4= review.user.name 
-            p Google Inc
+            p Traveller
         .rating
             p= review.review
             .stars
@@ -71,7 +71,7 @@ block content
             #map(data-locations = `${JSON.stringify(tour.locations)}`)
 
         section.tour-reviews 
-            .tour-review-conatiner 
+            .tour-review-container 
                 each review in tour.reviews
                     +reviewCard(review)
 
@@ -84,5 +84,8 @@ block content
                 .booking-center 
                     h2 What are You Waiting For?
                     p= `${tour.duration} days. 1 adventure. Infinite memories. Make it yours today!`
-                a.booking-cta(href="/booktour") Log in To book Tour
+                if user
+                    a.booking-cta(href="/booktour") Book Now  
+                else
+                    a.booking-cta(href="/booktour") Log in To book Tour
                     

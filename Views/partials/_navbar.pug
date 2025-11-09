@@ -36,8 +36,13 @@
         if user
             .user-profile 
                 span= user.name.split(' ')[0]
-                a(href="/userDashboard") 
-                    img(src=`/Images/Users/${user.photo || 'Images/Users/default-profile.jpeg'}`, alt= `photo of ${user.name}`)
+                img#profile-img(src=`/Images/Users/${user.photo  || 'default-profile.jpeg'}`, alt= `photo of ${user.name}`)
+                .user-profile-modal 
+                    a(href="/userDashboard") Profile
+                    a#logout-link(href="#")
+                        span Logout 
+                        i.fa-solid.fa-right-from-bracket 
+
         else
             .btns.desktop-btns
                 a(href="/signUp") Sign Up

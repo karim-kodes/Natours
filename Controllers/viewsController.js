@@ -44,22 +44,10 @@ exports.getSignUp = catchAsync(async (req, res) => {
   });
 });
 
-exports.getAdminPage = catchAsync(async (req, res) => {
-  try {
-    const tours = await Tour.find();
-    const users = await User.find();
-    res.status(200).render("pages/adminDashboard", {
-      title: "Admin Dashboard",
-      tours,
-      users,
-    });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({
-      status: "error",
-      message: "Failed to load Admin page",
-    });
-  }
+exports.getUserDashboard = catchAsync(async (req, res) => {
+  res.status(200).render("pages/userDashboard", {
+    title: "User Profile",
+  });
 });
 
 exports.getToursPage = catchAsync(async (req, res) => {

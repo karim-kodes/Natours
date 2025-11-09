@@ -93,8 +93,16 @@ exports.protect = catchAsync(async (req, res, next) => {
       new AppError("You are not logged in! Please log in to get access", 401)
     );
   }
-  // 2. Verifying the token
-  const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
+
+  let decoded;
+  try {
+    decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
+  } catch (err) {
+    return next(
+      new AppError("Invalid or expired token! Please log in again.", 401)
+    );
+  }
+
   console.log(decoded);
 
   // 3. Check if user still exists
@@ -116,28 +124,37 @@ exports.protect = catchAsync(async (req, res, next) => {
 });
 
 exports.isLoggedIn = catchAsync(async (req, res, next) => {
-  if (req.cookies.jwt) {
-    // 1. Verifying the token
-    const decoded = await promisify(jwt.verify)(
-      req.cookies.jwt,
-      process.env.JWT_SECRET
-    );
-    console.log(decoded);
+  console.log("➡️ isLoggedIn middleware start");
 
-    // 2. Check if user still exists
-    const currentUser = await User.findById(decoded.id);
-    if (!currentUser) {
+  if (req.cookies.jwt) {
+    try {
+      const decoded = await promisify(jwt.verify)(
+        req.cookies.jwt,
+        process.env.JWT_SECRET
+      );
+      const currentUser = await User.findById(decoded.id);
+      if (!currentUser) return next();
+      if (currentUser.changedPasswordAfter(decoded.iat)) return next();
+
+      res.locals.user = currentUser;
+    } catch (err) {
+      // Malformed or expired token
       return next();
     }
-    // 3. Check if user changed password after the token was issued
-    if (currentUser.changedPasswordAfter(decoded.iat)) {
-      return next();
-    }
-    // GRANT ACCESS TO PROTECTED ROUTE
-    res.locals.user = currentUser;
-    return next();
   }
+
+  // Always call next() if there is no JWT
   next();
+});
+
+exports.logOut = catchAsync((req, res) => {
+  res.cookie("jwt", "loggedout", {
+    expiresIn: new Date(Date.now() + 10 * 1000),
+    httpOnly: true,
+  });
+  res.status(200).json({
+    status: "success",
+  });
 });
 
 exports.restrictTo = (...roles) => {

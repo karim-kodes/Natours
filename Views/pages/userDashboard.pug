@@ -1,0 +1,220 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Natours | #{title}
+        link(rel="stylesheet", href="/Css/admin.css")
+        link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css")
+        link(rel="stylesheet", href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap")
+
+        link(rel="icon", type="image/png", sizes="40x40", href="/Images/Natours-fav-icon-32.png")
+        script(defer, src="/js/dashboard.js")
+
+    body
+        .dashboard
+            .sidebar
+                .logo
+                    img(src= "/images/dashboard-logo-icon.png")
+                    h2 Natours
+                nav.links 
+                    ul 
+                        li.sidelink-active
+                            i.fa-solid.fa-gauge-simple
+                            a(href="/overview") Overview 
+                        li
+                            i.fa-solid.fa-calendar-week
+                            a(href="/my-bookings") My Bookings 
+                        li
+                            i.fa-solid.fa-check-to-slot
+                            a(href="/my-reviewa") My Reviews 
+                        li
+                            i.fa-solid.fa-message
+                            a(href="/messages") Messages 
+                        li
+                            i.fa-solid.fa-gear
+                            a(href="/setting") Setting 
+            main.main-content 
+                .main-header 
+                    h3 Overview
+                    .search-bar 
+                        i.fa-solid.fa-magnifying-glass
+                        input(type="text", placeholder="Search")
+                    .account-profile 
+                        i.fa-regular.fa-bell
+                        i.fa-regular.fa-envelope
+                        .user-account 
+                            img(src="/images/users/user-male-1.jpeg", alt="User Profile")
+                            .account 
+                                h4.username John Doe
+                                p.account-label user
+                section.overview
+                    .overview-cards 
+                        .overview-card 
+                            .card-header 
+                                span Total Bookings 
+                                i.fa-regular.fa-circle-check
+                            .card-label 
+                                h2 236
+                                .label-desc 
+                                    span Since last week
+                                    span.success +1.75%
+                        .overview-card 
+                            .card-header 
+                                span Ongoing Tours 
+                                i.fa-solid.fa-chart-simple
+                            .card-label 
+                                h2 236
+                                .label-desc 
+                                    span Since last week
+                                    span.success +2.75%
+                        .overview-card 
+                            .card-header 
+                                span Tour Reviews 
+                                i.fa-regular.fa-star
+                            .card-label 
+                                h2 236
+                                .label-desc 
+                                    span Since last week
+                                    span.fail -1.5%
+                        .user-card-section
+                            .card-title 
+                                h3 My Card 
+                                .add-card
+                                    i.fa-solid.fa-plus
+                                    a(href="/add-card") Add Card
+                                    
+                            .user-card
+                                .card-top 
+                                    .card-grid 
+                                        div 
+                                        div 
+                                        div 
+                                        div 
+                                    .card-spiral 
+                                        div
+                                        div 
+                                        div
+                                .card-name
+                                    h2 John Doe
+                                .card-details 
+                                    .detail 
+                                        span Exp
+                                        p 07/28
+                                    .detail 
+                                        span cvv
+                                        p 645
+                        .review-chart 
+                            .review-top 
+                                p Reviews in The Last Year
+                                span This Year
+                            .review-count 
+                                h2 450
+                                span.success +1.78%
+                            .review-graph
+                                canvas#booking-chart
+                        .top-tour 
+                            .tour-header 
+                                h4 Top Tour
+                                i.fa-solid.fa-bolt
+                            .tour-image 
+                                img(src="/images/Tours/Diani-beach-1.jpg", alt="")
+                            .tour-details 
+                                .tour-detail 
+                                    h4 Total Bookings: 
+                                        span 200
+                                .tour-detail 
+                                    h4 Total Ratings: 
+                                        span 500
+                        .booking-history
+                            h2 Booking History
+                            table.booking-history-table 
+                                thead 
+                                    tr 
+                                        th Tour Name 
+                                        th Date 
+                                        th Amount 
+                                        th Location 
+                                        th Status
+                                tbody 
+                                    tr 
+                                        td Diani Beach Paradise 
+                                        td 2025-10-23
+                                        td $200.50
+                                        td Diani, Mombasa 
+                                        td 
+                                            span.completed Completed
+                                    tr 
+                                        td The Tsavo Expediture 
+                                        td 2025-01-17
+                                        td $450.00
+                                        td Nairobi, Kenya 
+                                        td 
+                                            span.pending Pending
+
+                                    tr 
+                                        td Lamu Island Retreat 
+                                        td 2025-11-01
+                                        td $2110.50
+                                        td Lamu, Kenya 
+                                        td 
+                                            span.completed Completed
+                                    tr 
+                                        td Nairobi National park 
+                                        td 2025-10-23
+                                        td $200.50
+                                        td Nairobi, Kenya 
+                                        td 
+                                            span.confirmed Confirmed
+                section.my-bookings
+                    .my-bookings-container
+                        h2 My Bookings
+                        table.booking-history-table 
+                            thead 
+                                tr 
+                                    th Tour Name 
+                                    th Since 
+                                    th Amount 
+                                    th Location 
+                                    th Status
+                            tbody 
+                                tr 
+                                    td Diani Beach Paradise 
+                                    td 1 month ago
+                                    td $200.50
+                                    td Diani, Mombasa 
+                                    td 
+                                        span.completed Completed
+                                tr 
+                                    td The Tsavo Expediture 
+                                    td 2 years ago
+                                    td $450.00
+                                    td Nairobi, Kenya 
+                                    td 
+                                        span.pending Pending
+
+                                tr 
+                                    td Lamu Island Retreat 
+                                    td 2025-11-01
+                                    td $2110.50
+                                    td Lamu, Kenya 
+                                    td 
+                                        span.completed Completed
+                                tr 
+                                    td Nairobi National park 
+                                    td 2025-10-23
+                                    td $200.50
+                                    td Nairobi, Kenya 
+                                    td 
+                                        span.confirmed Confirmed
+                section.setting    
+                
+
+
+
+                    
+                            
+        script(src="https://cdn.jsdelivr.net/npm/chart.js")
+        script(src="/js/dashboard.js") 
+
+                        

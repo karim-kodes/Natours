@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const viewsController = require("../Controllers/viewsController");
-const authController = require("../Controllers/authController");
+const viewsController = require("../controllers/viewsController");
+const authController = require("../controllers/authController");
 
 router.use(authController.isLoggedIn);
 

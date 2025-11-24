@@ -19,7 +19,7 @@ exports.getHomePage = catchAsync(async (req, res) => {
       })
       .limit(10);
     // 2. Render the page with data
-    res.status(200).render("pages/Home", {
+    res.status(200).render("pages/home", {
       title: "Explore Kenya's Beauty",
       tours,
       reviews,

@@ -1,5 +1,5 @@
 const catchAsync = require("../utils/catchAsync");
-const User = require("./../Models/userModel");
+const User = require("./../models/userModel");
 const AppError = require("../utils/appError");
 const handlerFactory = require("./handlerFactory");
 const multer = require("multer");

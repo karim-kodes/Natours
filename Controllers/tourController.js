@@ -3,6 +3,59 @@ const catchAsync = require("./../utils/catchAsync");
 const handlerFactory = require("./handlerFactory");
 const AppError = require("./../utils/appError");
 // CONTROLLERS
+const multer = require("multer");
+const sharp = require("sharp");
+
+const multerStorage = multer.memoryStorage();
+
+const multerFilter = (req, file, cb) => {
+  if (file.mimetype.startsWith("image")) cb(null, true);
+  else cb(new Error("Not an image. Please upload only images!"), false);
+};
+
+const upload = multer({
+  storage: multerStorage,
+  fileFilter: multerFilter,
+});
+
+exports.uploadTourImages = upload.fields([
+  { name: "imageCover", maxCount: 1 },
+  { name: "images", maxCount: 3 },
+]);
+
+// resize images with sharp
+exports.resizeTourImages = async (req, res, next) => {
+  if (!req.files.imageCover || !req.files.images) return next();
+
+  // 1) COVER IMAGE
+  req.body.imageCover = `tour-${Date.now()}-cover.jpeg`;
+
+  await sharp(req.files.imageCover[0].buffer)
+    .resize(2000, 1333)
+    .toFormat("jpeg")
+    .jpeg({ quality: 90 })
+    .toFile(`public/images/Tours/${req.body.imageCover}`);
+
+  // 2) GALLEY IMAGES
+  req.body.images = [];
+
+  await Promise.all(
+    req.files.images.map(async (file, i) => {
+      const fileName = `tour-${Date.now()}-${i + 1}.jpeg`;
+
+      await sharp(file.buffer)
+        .resize(2000, 1333)
+        .toFormat("jpeg")
+        .jpeg({ quality: 90 })
+        .toFile(`public/images/Tours/${fileName}`);
+
+      req.body.images.push(fileName);
+    })
+  );
+
+  next();
+};
+
 // Aliasing
 exports.aliasTopTours = (req, res, next) => {
   req.query.limit = "5";
@@ -15,9 +68,34 @@ exports.aliasTopTours = (req, res, next) => {
 // GETTING ALL TOURS ////////
 exports.getTours = handlerFactory.getAll(Tour);
 // CREATING A TOUR
+exports.createTour = async (req, res, next) => {
+  try {
+    const newTour = await Tour.create({
+      name: req.body.name,
+      price: req.body.price,
+      duration: req.body.duration,
+      summary: req.body.summary,
+      difficulty: req.body.difficulty,
+      maxGroupSize: req.body.maxGroupSize,
+      location: req.body.location,
+      imageCover: req.body.imageCover,
+      images: req.body.images,
+    });
+
+    res.status(201).json({
+      status: "success",
+      data: { tour: newTour },
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(400).json({
+      status: "fail",
+      message: err.message,
+    });
+  }
+};
 
 exports.getTour = handlerFactory.getOne(Tour, { path: "reviews" });
-exports.createTour = handlerFactory.createOne(Tour);
 exports.updateTour = handlerFactory.updateOne(Tour);
 exports.deleteTour = handlerFactory.deleteOne(Tour);
 

@@ -137,6 +137,7 @@ exports.isLoggedIn = catchAsync(async (req, res, next) => {
       if (currentUser.changedPasswordAfter(decoded.iat)) return next();
 
       res.locals.user = currentUser;
+      req.user = currentUser;
     } catch (err) {
       // Malformed or expired token
       return next();

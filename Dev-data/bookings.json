@@ -1,0 +1,142 @@
+[
+  {
+    "tour": "5c88fa8cf4afda39709c2951",
+    "user": "5c8a1dfa2f8fb814b56fa181",
+    "price": 499,
+    "createdAt": "2025-01-05T09:00:00.000Z",
+    "paid": true
+  },
+  {
+    "tour": "5c88fa8cf4afda39709c295a",
+    "user": "5c8a1dfa2f8fb814b56fa181",
+    "price": 350,
+    "createdAt": "2025-01-10T11:15:00.000Z",
+    "paid": true
+  },
+  {
+    "tour": "5c88fa8cf4afda39709c2961",
+    "user": "5c8a1dfa2f8fb814b56fa181",
+    "price": 799,
+    "createdAt": "2025-01-22T14:45:00.000Z",
+    "paid": true
+  },
+  {
+    "tour": "5c88fa8cf4afda39709c295d",
+    "user": "5c8a1dfa2f8fb814b56fa181",
+    "price": 199,
+    "createdAt": "2025-01-30T08:20:00.000Z",
+    "paid": true
+  },
+  {
+    "tour": "5c88fa8cf4afda39709c2966",
+    "user": "5c8a1e1a2f8fb814b56fa182",
+    "price": 1200,
+    "createdAt": "2025-02-03T16:30:00.000Z",
+    "paid": true
+  },
+  {
+    "tour": "5c88fa8cf4afda39709c2970",
+    "user": "5c8a1ec62f8fb814b56fa183",
+    "price": 460,
+    "createdAt": "2025-02-10T10:00:00.000Z",
+    "paid": true
+  },
+  {
+    "tour": "5c88fa8cf4afda39709c2974",
+    "user": "5c8a1ec62f8fb814b56fa183",
+    "price": 300,
+    "createdAt": "2025-02-18T13:00:00.000Z",
+    "paid": true
+  },
+  {
+    "tour": "5c88fa8cf4afda39709c296c",
+    "user": "5c8a20d32f8fb814b56fa187",
+    "price": 550,
+    "createdAt": "2025-02-24T09:45:00.000Z",
+    "paid": true
+  },
+  {
+    "tour": "69005e9fac4184c2c2a3c574",
+    "user": "5c8a211f2f8fb814b56fa188",
+    "price": 899,
+    "createdAt": "2025-03-01T15:30:00.000Z",
+    "paid": true
+  },
+  {
+    "tour": "69005e9fac4184c2c2a3c56e",
+    "user": "5c8a211f2f8fb814b56fa188",
+    "price": 215,
+    "createdAt": "2025-03-05T12:10:00.000Z",
+    "paid": true
+  },
+  {
+    "tour": "69005e9fac4184c2c2a3c572",
+    "user": "5c8a211f2f8fb814b56fa188",
+    "price": 420,
+    "createdAt": "2025-03-12T17:20:00.000Z",
+    "paid": true
+  },
+  {
+    "tour": "5c88fa8cf4afda39709c2951",
+    "user": "5c8a23c82f8fb814b56fa18d",
+    "price": 699,
+    "createdAt": "2025-03-18T07:55:00.000Z",
+    "paid": true
+  },
+  {
+    "tour": "5c88fa8cf4afda39709c295a",
+    "user": "5c8a23de2f8fb814b56fa18e",
+    "price": 380,
+    "createdAt": "2025-04-02T10:40:00.000Z",
+    "paid": true
+  },
+  {
+    "tour": "5c88fa8cf4afda39709c2961",
+    "user": "5c8a24282f8fb814b56fa18f",
+    "price": 1500,
+    "createdAt": "2025-04-06T14:25:00.000Z",
+    "paid": true
+  },
+  {
+    "tour": "5c88fa8cf4afda39709c295d",
+    "user": "5c8a24402f8fb814b56fa190",
+    "price": 275,
+    "createdAt": "2025-04-12T08:00:00.000Z",
+    "paid": true
+  },
+  {
+    "tour": "5c88fa8cf4afda39709c2966",
+    "user": "5c8a245f2f8fb814b56fa191",
+    "price": 990,
+    "createdAt": "2025-04-18T16:45:00.000Z",
+    "paid": true
+  },
+  {
+    "tour": "5c88fa8cf4afda39709c2970",
+    "user": "5c8a24822f8fb814b56fa192",
+    "price": 430,
+    "createdAt": "2025-04-20T11:32:00.000Z",
+    "paid": true
+  },
+  {
+    "tour": "5c88fa8cf4afda39709c2974",
+    "user": "5c8a24822f8fb814b56fa192",
+    "price": 520,
+    "createdAt": "2025-04-25T09:18:00.000Z",
+    "paid": true
+  },
+  {
+    "tour": "5c88fa8cf4afda39709c296c",
+    "user": "5c8a24a02f8fb814b56fa193",
+    "price": 870,
+    "createdAt": "2025-04-30T15:50:00.000Z",
+    "paid": true
+  },
+  {
+    "tour": "69005e9fac4184c2c2a3c574",
+    "user": "5c8a24a02f8fb814b56fa193",
+    "price": 330,
+    "createdAt": "2025-05-02T13:10:00.000Z",
+    "paid": true
+  }
+]

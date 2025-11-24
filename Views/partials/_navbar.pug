@@ -14,11 +14,11 @@
             ul
                 li.active: a(href="/") Home
                 li: a(href="/tours") Tours
-                li: a(href="/") About
-                li: a(href="/") Contact Us
+                li: a(href="/about-us") About Us
+                li: a(href="/contact-us") Contact Us
             .btns
-                a(href="/sign-up") Sign Up
-                a(href="/sign-in") Sign In
+                a(href="/signUp") Sign Up
+                a(href="/login") Sign In
     // DESKTOP NAVBAR
     .nav-desktop
         .nav-logo
@@ -38,7 +38,7 @@
                 span= user.name.split(' ')[0]
                 img#profile-img(src=`/Images/Users/${user.photo  || 'default-profile.jpeg'}`, alt= `photo of ${user.name}`)
                 .user-profile-modal 
-                    a(href="/userDashboard") Profile
+                    a(href="/me") Profile
                     a#logout-link(href="#")
                         span Logout 
                         i.fa-solid.fa-right-from-bracket 

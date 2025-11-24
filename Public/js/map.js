@@ -3,27 +3,45 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!mapElement) return;
 
   const locations = JSON.parse(mapElement.dataset.locations);
-  const map = L.map("map", { scrollWheelZoom: true });
 
-  L.tileLayer("https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png", {
+  const map = L.map("map", { scrollWheelZoom: false });
+
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     attribution: "&copy; OpenStreetMap contributors",
+    maxZoom: 18,
   }).addTo(map);
 
-  const points = [];
+  const markers = [];
 
   locations.forEach((loc) => {
     const [lng, lat] = loc.coordinates;
-    points.push([lat, lng]);
-    L.marker([lat, lng])
-      .addTo(map)
-      .bindPopup(`<p>Day ${loc.day}: ${loc.description}</p>`);
-    var popup = L.popup()
-      .setLatLng({ lng, lat })
-      .setContent(`<p>Day ${loc.day}: ${loc.description}</p>`)
-      .openOn(map);
+
+    // Add marker
+    const marker = L.marker([lat, lng]).addTo(map);
+    markers.push(marker);
+
+    // Create standalone popup that stays open
+    const popup = L.popup({
+      closeButton: false,
+      autoClose: false,
+      closeOnClick: false,
+      offset: [0, -30],
+      className: "custom-popup", // optional custom class for styling
+    })
+      .setLatLng([lat, lng])
+      .setContent(`<p><strong>Day ${loc.day}:</strong> ${loc.description}</p>`)
+      .openOn(map); // This shows popup immediately
   });
 
-  L.polyline(points, { color: "blue", weight: 2 }).addTo(map);
-  const bounds = L.latLngBounds(points);
-  map.fitBounds(bounds, { padding: [50, 50] });
+  // Fit map to all markers
+  const bounds = L.featureGroup(markers).getBounds();
+  map.fitBounds(bounds, { padding: [100, 100] });
+
+  // If only one marker, zoom out a bit
+  if (markers.length === 1) {
+    map.setView(markers[0].getLatLng(), 10);
+  }
+
+  // Fix rendering if map container was hidden
+  setTimeout(() => map.invalidateSize(), 300);
 });

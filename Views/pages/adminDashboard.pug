@@ -3,7 +3,7 @@ html(lang="en")
     head
         meta(charset="UTF-8")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        title #{title}
+        title Natours | #{title}
         link(rel="stylesheet", href="/Css/admin.css")
         link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css")
         link(rel="stylesheet", href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap")
@@ -11,67 +11,358 @@ html(lang="en")
         link(rel="icon", type="image/png", sizes="40x40", href="/Images/Natours-fav-icon-32.png")
         script(defer, src="/js/dashboard.js")
 
-    body 
+    body
+        mixin overviewCard(title, icon, value, percent)
+            .overview-card
+                .card-header
+                    span= title
+                    i(class=icon)
+                .card-label
+                    h2= value
+                    .label-desc
+                        span Since last week
+                        if percent.startsWith("+")
+                            span.success= percent
+                        else
+                            span.fail= percent
+
+        
         .dashboard
-            .sidebar 
-                ul 
-                    li.current
-                        i.fa-solid.fa-chart-simple 
-                        span Overview 
-                    li
-                        i.fa-solid.fa-location-dot 
-                        span Tours 
-                    li
-                        i.fa-solid.fa-calendar-week 
-                        span Bookings 
-                    li
-                        i.fa-solid.fa-user 
-                        span Users 
-                    li
-                        i.fa-solid.fa-check-to-slot 
-                        span Reviews 
-                    li
-                        i.fa-solid.fa-gear 
-                        span Settings 
-            .main-content
-                .overview-tab 
-                    .top-sec 
-                        h2 Admin Dashboard 
-                        .toggle 
-                            i.fa-solid.fa-moon.dark 
-                            i.fa-solid-fa-sun.light
-                    .count-cards 
-                        .count-card.gen-card 
-                          if tours
-                            p Total Tours 
-                            h3 125
-                        .count-card 
-                            p Total Bookings 
-                            h3 490
-                        .count-card 
-                            p Total Users 
-                            h3 1,250
-                        .count-card 
-                            p Pending Bookings 
-                            h3 40
-                    .stats 
-                        .recent-bookings 
-                            h3 Recent Bookings 
-                            table.bookings-table 
-                                thead 
+            .sidebar
+                .logo
+                    img(src= "/images/dashboard-logo-icon.png")
+                    h2 Natours    
+                nav.links 
+                    ul 
+                        li.tab-link.sidelink-active(data-tab="overview")
+                            i.fa-solid.fa-gauge-simple
+                            a(href="#") Overview 
+                        li.tab-link(data-tab="bookings")
+                            i.fa-solid.fa-calendar-week
+                            a(href="#") Bookings 
+                        li.tab-link(data-tab="tours")
+                            i.fa-solid.fa-location-dot
+                            a(href="#") Tours 
+                        li.tab-link(data-tab="reviews")
+                            i.fa-solid.fa-check-to-slot
+                            a(href="#") Reviews 
+                        li.tab-link(data-tab="users")
+                            i.fa-solid.fa-user
+                            a(href="#") Users 
+            main.main-content 
+                .main-header 
+                    h3 Overview
+                    .search-bar 
+                        i.fa-solid.fa-magnifying-glass
+                        input(type="text", placeholder="Search")
+                    .account-profile
+                        .theme-toggle  
+                            i.fa-regular.fa-sun.active
+                            i.fa-regular.fa-moon
+                        .user-account 
+                            img(src=`/images/users/${admin.photo || "default-profile.jpeg"}`, alt=`${admin.role} Profile`)
+                            .account 
+                                h4.username= admin.name 
+                                p.account-label= admin.role.charAt(0).toUpperCase() + admin.role.slice(1)
+                section.overview.tab-content.tab-content-active#overview
+                    .overview-cards 
+                        +overviewCard(
+                            "Total Bookings",
+                            "fa-regular fa-circle-check",
+                            overviewStats.totalBookings,
+                            overviewStats.bookingsPercent
+                            )
+                        +overviewCard(
+                            "Total Tours",
+                            "fa-solid fa-chart-simple",
+                            overviewStats.totalTours,
+                            overviewStats.toursPercent
+                            )
+                        +overviewCard(
+                            "Tour Reviews",
+                            "fa-regular fa-star",
+                            overviewStats.totalReviews,
+                            overviewStats.reviewsPercent
+                            )
+                        .recent-tours-section
+                            h2 Latest Tours 
+                            .latest-tours 
+                                each tour in latestTours
+                                    .latest-tour 
+                                        img(src=`/images/Tours/${tour.imageCover}`, alt=`${tour.name} photo`)
+                                        span= tour.name
+                                        - const daysAgo = Math.floor((Date.now() - new Date(tour.createdAt)) / (1000 * 60 * 60 * 24));
+                                        p= daysAgo === 0 ? "Today" : daysAgo + "days ago"
+                                //- .latest-tour 
+                                //-     img(src="/images/Tours/aberdare-1.jpg", alt="")
+                                //-     span Aberdare Tour
+                                //-     p 3 days ago
+                                //- .latest-tour 
+                                //-     img(src="/images/Tours/aberdare-1.jpg", alt="")
+                                //-     span Aberdare Tour
+                                //-     p 3 days ago
+                            a(href="/tours") View All Tours
+
+                        .review-chart 
+                            .review-top 
+                                h2 Bookings in The Last Year
+                                span This Year
+                            .review-count 
+                                h2 450
+                                span.success +1.78%
+                            .review-graph
+                                canvas#booking-chart
+                        .top-tour 
+                            .tour-header 
+                                h4 Top Tour
+                                i.fa-solid.fa-bolt
+                            if topTour
+                                h4= topTour.name
+                                .tour-image 
+                                    img(src=`/images/Tours/${topTour.imageCover}`, alt=`${topTour.name}`)
+                                .tour-details 
+                                    .tour-detail 
+                                        h4 Total Bookings: 
+                                            span= topTour.totalBookings
+                                    .tour-detail 
+                                        h4 Total Ratings: 
+                                            span= topTour.totalRatings
+                        .my-bookings-overview
+                            .my-bookings-container
+                                .bookings-top 
+                                    h2 Recent Bookings
+                                    .filter 
+                                        i.fa-solid.fa-filter
+                                        select#sort
+                                            option(value="default") Sort by
+                                            option(value="price-asc") Price: Low to High
+                                            option(value="price-desc") Price: High to Low
+                                            option(value="ratings-desc") : High to Low
+                                table.table.booking-history-table 
+                                    thead 
+                                        tr 
+                                            th Tour Name 
+                                            th User 
+                                            th Amount 
+                                            th Date 
+                                            th Status
+                                    tbody
+                                        each recentBooking in recentBookings 
+                                            tr 
+                                                td= recentBooking.tour && recentBooking.tour.name ? recentBooking.tour.name : "unknown tour"
+                                                td= recentBooking.user && recentBooking.user.name ? recentBooking.user.name : "unknown user"
+                                                td ksh #{recentBooking.price}
+                                                td= recentBooking.timeAgo
+                                                td
+                                                    if recentBooking.paid 
+                                                        span.completed Completed
+                                                    else 
+                                                        span.pending Pending
+                                        
+                section.my-bookings.tab-content#bookings
+                    .my-bookings-container
+                        .bookings-top 
+                            h2 Tour Bookings
+                            .buttons
+                                .filter 
+                                    i.fa-solid.fa-filter
+                                    select#sort
+                                        option(value="default") Sort by
+                                        option(value="price-asc") Price: Low to High
+                                        option(value="price-desc") Price: High to Low
+                                        option(value="ratings-desc") : High to Low
+                                a.btn.btn-green(href="/api/v1/bookings/exportBookingsReport")
+                                    i.fa-solid.fa-file-export 
+                                    span Export Report
+
+                        table.table.booking-history-table#bookingsTable 
+                            thead 
+                                tr 
+                                    th Tour Name 
+                                    th User 
+                                    th Amount 
+                                    th Date 
+                                    th Status
+                            tbody
+                                each booking in bookings 
                                     tr 
-                                        th Tour
-                                        th User
-                                        th Date
-                                        th Status
-                                tbody 
-                                    tr 
-                                        td Maasai Mara 
-                                        td Abdikarim Mohamed 
-                                        td 2025-10-03 Mara 
+                                        td= booking.tour ? booking.tour.name : "unknown tour" 
+                                        td= booking.user ? booking.user.name : "unknown user"
+                                        td $#{booking.price}
+                                        td= booking.timeAgo
                                         td
-                                            span.confirmed Confirmed
-        //- script(src="/js/dashboard.js") 
+                                            if booking.paid 
+                                                span.completed Completed
+                                            else 
+                                                span.pending Pending
+                        .pagination 
+                            span page 1 of 3
+                            .control-btns 
+                                button.prev Prev 
+                                button.next Next
+
+                section.allTours.tab-content#tours  
+                    .alltours-container 
+                        .tours-top 
+                            .fiter-tabs 
+                                span.filter-tab.filter-tab-active All  
+                                span.filter-tab Published  
+                                span.filter-tab Unpublished  
+                            button.add-tour-btn 
+                                i.fa-solid.fa-plus
+                                span Add Tour
+                        table.table.booking-history-table#toursTable 
+                            thead 
+                                tr 
+                                    th Tour  
+                                    th Price 
+                                    th Date 
+                                    th Duration 
+                                    th State
+                                    th Actions
+                            tbody
+                                each tour in tours 
+                                    tr 
+                                        td= tour.name 
+                                        td $#{tour.price}
+                                        td= tour.createdAt.toISOString().slice(0, 10)
+                                        td= `${tour.duration} days` 
+                                        td 
+                                            span.published Published
+                                        td.actions 
+                                            i.fa-solid.fa-pen(data-id=tour._id) 
+                                            i.fa-solid.fa-trash.delete-btn(data-id=tour._id)      
+                        .pagination 
+                            span page 1 of 3
+                            .control-btns 
+                                button.prev Prev 
+                                button.next Next
+                        .confirm-modal#confirmDeleteModal 
+                            p Are you sure you want to delete this tour?
+                            .confirm-btns 
+                                button.cancel-btn Cancel
+                                button.delete-btn Delete
+                        .add-tour-modal.modal-overlay 
+                            .modal 
+                                .modal-header 
+                                    h2 Add New Tour 
+                                    span#closeModal.close-btn 
+                                        i.fa-solid.fa-close
+                                form(id="addTourForm", class="modal-form", enctype="multipart/form-data")
+                                    .form-group 
+                                        label(for="name") Tour Name 
+                                        input(type="text", id="name", name= "name", placeholder= "Enter Tour Name", required) 
+                                    .form-group 
+                                        label(for="price") Price ($)  
+                                        input(type="text", id="price", name="price", placeholder= "Enter Tour Price", required)
+                                    .form-group 
+                                        label(for="duration") Duration (days)
+                                        input(type="text", id="duration", name="duration", placeholder="Enter Duration", required) 
+                                    .form-group 
+                                        label(for="location") Location 
+                                        input(type="text", id="location", name ="location", placeholder="Enter Location", required)
+                                    .form-group 
+                                        label(for="difficulty") Difficulty
+                                        select(name="difficulty", required)
+                                            option(value="easy") Easy
+                                            option(value="medium") Medium
+                                            option(value="difficult") Difficult
+                                    .form-group 
+                                        label(for="maxGroupSize") Max Group Size
+                                        input(type="number", name="maxGroupSize", placeholder="Enter group size", required)
+                                    .form-group.col-span 
+                                        label(for="summary") Summary 
+                                        textarea(id ="summary", name="summary", rows="3" placeholder="Short Tour Summary.....", required)
+                                    .form-group.col-span 
+                                        label(for="imageCover") Cover Image 
+                                        input(type="file", id="imageCover", name="imageCover", accept= "image/*", required)
+                                        .image-preview#coverPreview 
+                                    .form-group.col-span 
+                                        label(for="images") Tour Images (select 3)    
+                                        input(type="file", id="images", name="images", multiple accept="image/*", required)
+                                        .image-preview#imagePreview 
+                                    button(type="submit", class="submit-btn") Create Tour
+                section.reviews.tab-content#reviews
+                    .reviews-container 
+                        .bookings-top 
+                            h2 Reviews
+                            .filter 
+                                i.fa-solid.fa-filter
+                                select#sort
+                                    option(value="default") Sort by
+                                    option(value="price-asc") rating: Low to High
+                                    option(value="ratings-desc") rating: High to Low
+                        table.table.reviews-table#reviewsTable
+                            thead 
+                                tr  
+                                    th User 
+                                    th Tour 
+                                    th Rating 
+                                    th Review 
+                                    th Date 
+                            tbody
+                                each review in reviews 
+                                    tr 
+                                        td.review-user 
+                                            img(src=`/Images/Users/${review.user.photo || "default-profile.jpeg"}`, alt=`${review.user.photo}`)
+                                            span= review.user.name  
+                                        td= review.tour.name
+                                        td.review-rating 
+                                            i.fa-regular.fa-star
+                                            span #{review.rating}/5
+                                        td.review-text= review.review
+                                        td= review.createdAt.toISOString().slice(0, 10) 
+                               
+                        .pagination 
+                            span page 1 of 3
+                            .control-btns 
+                                button.prev Prev 
+                                button.next Next
+                section.users.tab-content#users   
+                    .users-container 
+                        h2 Users 
+                        table.table.users-table#usersTable 
+                            thead 
+                                tr 
+                                    th Photo
+                                    th Name 
+                                    th Role 
+                                    th Email
+                                    th Status
+                            tbody
+                                each user in users 
+                                    tr 
+                                        td.review-user 
+                                            img(src=`/images/Users/${user.photo ||  'default-profile.jpeg'}`, alt=`${user.name} photo`)
+                                        td= user.name
+                                        td.review-rating 
+                                            if user.role === "admin"
+                                                i.fa-solid.fa-crown
+                                                span Admin
+                                            else
+                                                i.fa-solid.fa-user
+                                                span User
+                                        td= user.email
+                                        td
+                                            if user.isActive 
+                                                span.completed Active
+                                            else    
+                                                span.pending Inactive      
+                        .pagination 
+                            span page 1 of 3
+                            .control-btns 
+                                button.prev Prev 
+                                button.next Next
+
+                        
+
+                
 
 
 
+                    
+                            
+        script(src="https://cdn.jsdelivr.net/npm/chart.js")
+        //- script(src="/js/dashboard.js", defer) 
+
+                        

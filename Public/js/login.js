@@ -17,7 +17,7 @@ const login = async (email, password) => {
       successMessage.textContent = "Logged in Successfully!";
       window.setTimeout(() => {
         if (userRole === "admin") {
-          location.assign("/adminDashboard");
+          location.assign("/admin-dashboard");
         } else {
           location.assign("/");
         }

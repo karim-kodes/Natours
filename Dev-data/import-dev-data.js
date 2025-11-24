@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const User = require("../models/userModel");
 const Tour = require("../models/tourModel");
+const Booking = require("../models/bookingModel");
 const Review = require("../models/reviewModel");
 
 dotenv.config({ path: "./config.env" });
@@ -21,20 +22,23 @@ const users = JSON.parse(fs.readFileSync(`${__dirname}/users.json`, "utf-8"));
 const reviews = JSON.parse(
   fs.readFileSync(`${__dirname}/reviews.json`, "utf-8")
 );
+const bookings = JSON.parse(
+  fs.readFileSync(`${__dirname}/bookings.json`, "utf-8")
+);
 
 // ✅ Check that all review references exist
-const reviewIssues = reviews.filter((r) => {
-  const tourExists = tours.some((t) => t._id === r.tour);
-  const userExists = users.some((u) => u._id === r.user);
-  return !tourExists || !userExists;
-});
+// const reviewIssues = reviews.filter((r) => {
+//   const tourExists = tours.some((t) => t._id === r.tour);
+//   const userExists = users.some((u) => u._id === r.user);
+//   return !tourExists || !userExists;
+// });
 
-if (reviewIssues.length > 0) {
-  console.log("⚠️ Reviews referencing missing tours or users:");
-  console.log(reviewIssues);
-} else {
-  console.log("✅ All reviews reference valid tours and users!");
-}
+// if (reviewIssues.length > 0) {
+//   console.log("⚠️ Reviews referencing missing tours or users:");
+//   console.log(reviewIssues);
+// } else {
+//   console.log("✅ All reviews reference valid tours and users!");
+// }
 
 // Importing data into database
 const importData = async () => {
@@ -42,6 +46,7 @@ const importData = async () => {
     await Tour.create(tours);
     await User.create(users, { validateBeforeSave: false });
     await Review.create(reviews);
+    await Booking.create(bookings);
     console.log("Data Successfully loaded!!!");
   } catch (err) {
     console.log(err);
@@ -54,7 +59,7 @@ const deleteData = async () => {
     await Tour.deleteMany();
     await User.deleteMany();
     await Review.deleteMany();
-
+    // await Booking.deleteMany();
     console.log("Data deleted successfully!!!");
   } catch (err) {
     console.log(err);

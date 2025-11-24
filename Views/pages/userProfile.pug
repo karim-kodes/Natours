@@ -1,0 +1,108 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Natours | #{title}
+        link(rel="stylesheet", href="/Css/admin.css")
+        link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css")
+        link(rel="stylesheet", href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap")
+
+        link(rel="icon", type="image/png", sizes="40x40", href="/Images/Natours-fav-icon-32.png")
+        script(defer, src="/js/dashboard.js")
+        script(src="https://cdn.jsdelivr.net/npm/axios@1.6.6/dist/axios.min.js")
+        script(type="module", defer, src="/js/updateSettings.js")
+
+    body 
+
+    .dashboard-container
+        .profile-sidebar
+            h2 Dashboard
+            ul.nav-list 
+                li.navlink.active(data-tab="myBookings") 
+                    i.fa-solid.fa-calendar-week
+                    span My Bookings
+                li.navlink(data-tab="myReviews") 
+                    i.fa-solid.fa-star
+                    span My Reviews
+                li.navlink(data-tab="billing") 
+                    i.fa-solid.fa-suitcase
+                    span Billing
+                li.navlink(data-tab="settings") 
+                    i.fa-solid.fa-gear
+                    span Settings
+            
+
+        .content-area#dashboard-content
+            .user-header 
+                h3 My Bookings
+                .theme-toggle.profile-toggle  
+                    i.fa-regular.fa-sun.active
+                    i.fa-regular.fa-moon
+            .sections 
+                section.user-bookings.user-section.user-section-active#myBookings
+                    h2 My bookings 
+                    .card-container
+                        each booking in bookings 
+                            .card
+                                h3= booking.tour.name
+                                p Amount: 
+                                    span= booking.price + "ksh"
+                                p Booked on: 
+                                    span= booking.createdAt.toDateString()
+                                a(href=`/tour/${booking.tour.slug}`)  View Tour
+                       
+                section.user-bookings.user-section#myReviews
+                    h2 My Reviews 
+                    .card-container
+                        each review in reviews 
+                            .card
+                                h3= review.tour.name
+                                p Rating: 
+                                    span= review.rating + "/5"
+                                p Reviewed on: 
+                                    span= review.createdAt.toDateString()
+                                p= review.review
+                     
+                section.billings.user-section#billing
+                    h2 Billings 
+                    .card 
+                        span Name 
+                            p John Doe 
+                        span Street 
+                            p 123 Main Street, Nairobi, Kenya 00100
+                        span Email 
+                            p johndoe@gmail.com
+                        span Card 
+                            p Visa, ending with 4242
+                
+
+                section.user-settings.user-section#settings 
+                    .account-settings
+                        h2 Your Account Settings
+                        form.setting-form
+                            .form-group-user 
+                                label.form-label Name 
+                                input.form-input(type="text", name="name", value= user.name)
+                            .form-group-user
+                                label.form-label Email 
+                                input.form-input(type="email", name="email", value= user.email)
+                            .form-group-user.profile 
+                                img(src=user.name ? `/images/Users/${user.photo}` : "images/Users/default-profile.jpeg", alt="user profile")
+                                a.profile-btn(href="") Choose new photo
+
+                            button.form-btn(type="submit") Update Settings
+                    hr
+                    .password-change 
+                        h2 Password Change
+                        form.password-form
+                            .form-group-user 
+                                label.form-label Current Password 
+                                input.form-input(type="password", name="currentPassword")
+                            .form-group-user 
+                                label.form-label New Password 
+                                input.form-input(type="password", name = "newPassword")
+                            .form-group-user
+                                label.form-label Confirm Password 
+                                input.form-input(type="password", name="confirmPassword")
+                            button.form-btn(type="submit") Save Password

@@ -13,6 +13,8 @@ const qs = require("qs");
 const tourRoutes = require("./routes/tourRoutes");
 const userRoutes = require("./routes/userRoutes");
 const reviewRoutes = require("./routes/reviewRoutes");
+const bookingRoutes = require("./routes/bookingRoutes");
+const paymentRoutes = require("./routes/paymentRoutes");
 const viewsRoutes = require("./routes/viewsRoutes");
 const app = express();
 
@@ -136,6 +138,9 @@ app.use("/", viewsRoutes);
 app.use("/api/v1/tours", tourRoutes);
 app.use("/api/v1/users", userRoutes);
 app.use("/api/v1/reviews", reviewRoutes);
+app.use("/api/v1/bookings", bookingRoutes);
+app.use("/api/payments", paymentRoutes);
+
 // app.get("/test", (req, res) => {
 //   res.send("✅ Server is responding!");
 // });

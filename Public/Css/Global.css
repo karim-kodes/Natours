@@ -2,14 +2,15 @@
   /* Primary */
   --color-primary: #1c274c;
   --color-primary-2: #5dcad1;
+  --input-color: #f1f3f5;
 
   /* Neutrals */
   --color-bg: #fdfdfd;
   --color-surface: #f5f6f8;
 
   /* Text */
-  --text-primary: #111219; /* main body & headings */
-  --text-secondary: #4f5a66; /* secondary / helper text */
+  --text-primary: #14141ad6;
+  --text-secondary: #8c9298; /* secondary / helper text */
 
   /* State */
   --success: #2f9e44;
@@ -20,6 +21,18 @@ body {
   font-family: "Inter", sans-serif;
   background-color: var(--color-bg);
   height: 100vh;
+}
+
+.custom-popup .leaflet-popup-content-wrapper {
+  background: linear-gradient(45deg, #19264f, #2f5cf1);
+  color: white; /* text color */
+  border-radius: 10px; /* rounded corners */
+  padding: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.custom-popup .leaflet-popup-tip {
+  background: linear-gradient(45deg, #19264f, #2f5cf1);
 }
 
 /* MOBILE NAVIGATION */
@@ -921,12 +934,11 @@ body footer {
   padding: 0.7rem;
   font-size: 17px;
   border-radius: 5px;
-  background-color: #cfd3d386;
+  background-color: var(--input-color);
 }
 
 .input-error {
   outline: 1px solid red;
-  color: red;
 }
 
 .input-group input::placeholder {
@@ -949,10 +961,11 @@ body footer {
   transition: background 0.3s ease-in-out;
   color: white;
   font-size: 17px;
+  cursor: pointer;
 }
 
 .input-group button:hover {
-  background-color: #151e3b;
+  background: linear-gradient(45deg, #2f5cf1, #1c274c);
 }
 
 .form p {
@@ -1449,10 +1462,15 @@ body footer {
 
 .contact-form input,
 .contact-form textarea {
-  background-color: #5d76ca41;
+  background-color: #f6f7fa;
   border: none;
   padding: 0.5rem;
   border-radius: 5px;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: 1px solid #13192d;
 }
 
 .contact-form textarea {
@@ -1562,7 +1580,9 @@ body footer {
   margin-top: 2rem;
   flex-direction: column;
   text-align: center;
-  gap: 1rem;
+  gap: 4rem;
+  max-width: 900px;
+  justify-self: center;
 }
 
 .mission h2,
@@ -1582,6 +1602,114 @@ body footer {
 .mission p,
 .vision p {
   color: #757678;
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 1.6em;
+}
+
+.form-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4rem;
+  padding: 4rem;
+}
+
+.form-container form {
+  display: flex;
+  width: 400px;
+  max-width: 100%;
+  padding: 1rem;
+  background-color: white;
+  flex-direction: column;
+  gap: 1.5rem;
+  box-sizing: border-box;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.08);
+  border: 1px solid #ecebeb;
+  border-radius: 5px;
+}
+
+.form-container form h2 {
+  color: var(--text-primary);
+}
+
+/* FIX: Force grid to never exceed form width */
+.card-fields {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: hidden; /* safety lock */
+}
+
+/* FIX: Make ALL input elements flexible inside grid */
+select,
+.card-fields input,
+.mobile-fields input {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  border: none;
+  background-color: var(--color-surface);
+  padding: 0.6rem;
+  border-radius: 5px;
+  border: 1px solid #dedfe0;
+}
+
+.card-field label,
+.mobile-fields label {
+  color: var(--text-primary);
+}
+
+/* Card number full width */
+.card-field {
+  grid-column: span 3;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Every input section */
+.input-sec {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.input-sec input,
+.input-sec select {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.input-sec input::placeholder {
+  color: var(--text-secondary);
+}
+
+.form-container form button {
+  font-size: 16px;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  background: linear-gradient(45deg, #19264f, #2f5cf1);
+  margin-top: 2rem;
+  padding: 0.6rem;
+  cursor: pointer;
+  transition: background 0.3s all ease-in-out;
+}
+
+.form-container form button:hover {
+  background: linear-gradient(45deg, #2f5cf1, #19264f);
+}
+
+/* Mobile money section */
+.mobile-fields {
+  width: 100%;
+  max-width: 100%;
 }
 
 /* MEDIA QUERIES */

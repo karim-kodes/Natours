@@ -85,7 +85,8 @@ block content
                     h2 What are You Waiting For?
                     p= `${tour.duration} days. 1 adventure. Infinite memories. Make it yours today!`
                 if user
-                    a.booking-cta(href="/booktour") Book Now  
+                    a.booking-cta(href=`/checkout/${tour.id}`, data-id=`${tour.id}`) 
+                      | Book Now (KES #{tour.price}) 
                 else
-                    a.booking-cta(href="/booktour") Log in To book Tour
+                    a.booking-cta(href="/login") Log in To book Tour
                     

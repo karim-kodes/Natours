@@ -1,0 +1,87 @@
+extends ../layouts/layout.pug
+
+block content
+    .form-container
+        form#checkoutForm
+            h2 Checkout #{tour.name}
+            p.price total: KES #{tour.price}
+            // Payment method selection
+            select#paymentMethod
+                option(value="card") Card
+                option(value="mobile_money") Mpesa
+
+            // Card fields
+            .card-fields
+                .input-sec.card-field 
+                    label(for="card_number") Card Number
+                    input(type="text", name="card_number", placeholder="XXXX-XXXX-XXXX-XXXX")
+                .input-sec 
+                    label(for="cvv") CVV
+                    input(type="text", name="cvv", placeholder="CVV")
+                .input-sec 
+                    label(for="expiry_month") Expiry Month
+                    input(type="text", name="expiry_month", placeholder="MM")
+                .input-sec 
+                    label(for="expiry_year") Expiry Year 
+                    input(type="text", name="expiry_year", placeholder="YY")
+
+            // Mobile Money fields
+            .mobile-fields(style="display:none")
+                .input-sec 
+                    label(for="phone") Phone Number
+                    input(type="text", name="phone", placeholder="Enter phone number (2547XXXXXXXX)")
+
+            button(type="submit") Pay Now
+
+   
+    script.
+        document.addEventListener('DOMContentLoaded', () => {
+            const paymentSelect = document.getElementById('paymentMethod');
+            const cardFields = document.querySelector('.card-fields');
+            const mobileFields = document.querySelector('.mobile-fields');
+
+            paymentSelect.addEventListener('change', () => {
+                if (paymentSelect.value === 'card') {
+                    cardFields.style.display = 'grid';
+                    mobileFields.style.display = 'none';
+                } else if (paymentSelect.value === 'mobile_money') {
+                    cardFields.style.display = 'none';
+                    mobileFields.style.display = 'block';
+                }
+            });
+
+            document.getElementById('checkoutForm').addEventListener('submit', async (e) => {
+                e.preventDefault();
+
+                const paymentMethod = document.getElementById('paymentMethod').value;
+                const email = "user@example.com"; // replace with logged-in user's email
+                const amount = parseFloat(document.querySelector('p.price').textContent.replace(/[^0-9]/g, ''));
+
+                const data = { email, amount, paymentMethod };
+
+                if (paymentMethod === 'mobile_money') {
+                    const phone = document.querySelector('input[name="phone"]').value;
+                    if (!/^2547\d{8}$/.test(phone)) {
+                        return alert("Enter a valid Kenyan phone number (2547XXXXXXXX)");
+                    }
+                    data.phone = phone;
+                }
+
+
+                const res = await fetch('/api/payments/pay', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await res.json();
+                if (result.authorization_url) {
+                    // Redirect user to Paystack payment page
+                    window.location.href = result.authorization_url;
+                } else {
+                    alert('Payment failed, try again');
+                }
+            });
+
+        });
+

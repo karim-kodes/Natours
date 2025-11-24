@@ -6,7 +6,7 @@ const profileModal = document.querySelector(".user-profile-modal");
 
 // console.log(profileModal);
 // console.log(profileImg);
-if (profileImg & profileModal) {
+if (profileImg && profileModal) {
   profileImg.addEventListener("mouseover", () => {
     profileModal.style.opacity = 1;
   });
@@ -19,7 +19,7 @@ if (profileImg & profileModal) {
 }
 
 // Adding toggle effec to display the menu
-if (menu & close & links) {
+if (menu && close && links) {
   menu.addEventListener("click", () => {
     links.style.display = "block";
     menu.style.display = "none";

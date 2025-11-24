@@ -189,7 +189,7 @@ body {
 
 /* hero section */
 .hero {
-  background-image: url("./../Images/Hero-cover.webp");
+  background-image: url("./../images/Hero-cover.webp");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

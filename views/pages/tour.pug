@@ -65,7 +65,7 @@ block content
                
         section.images
             each img, i in tour.images
-                img(src=`/Images/Tours/${img}`, alt=`${tour.name} photo ${i + 1}`)
+                img(src=`/images/Tours/${img}`, alt=`${tour.name} photo ${i + 1}`)
         
         section.tour-map 
             #map(data-locations = `${JSON.stringify(tour.locations)}`)
@@ -85,8 +85,40 @@ block content
                     h2 What are You Waiting For?
                     p= `${tour.duration} days. 1 adventure. Infinite memories. Make it yours today!`
                 if user
-                    a.booking-cta(href=`/checkout/${tour.id}`, data-id=`${tour.id}`) 
-                      | Book Now (KES #{tour.price}) 
+                    button.btn.btn--green#payNow(data-tour-id=`${tour._id}`) Book Now 
                 else
                     a.booking-cta(href="/login") Log in To book Tour
+    script.
+        document.addEventListener("DOMContentLoaded", () => {
+            const payBtn = document.getElementById("payNow");
+            if (!payBtn) return;
+
+            payBtn.addEventListener("click", async () => {
+                payBtn.textContent = "Processing...";
+                payBtn.disabled = true;
+
+                const tourId = payBtn.dataset.tourId;
+
+                try {
+                    const res = await fetch(`/api/payments/pay/${tourId}`, {
+                        method: "POST"
+                    });
+
+                    const result = await res.json();
+
+                    if (result.authorization_url) {
+                        window.location.href = result.authorization_url;
+                    } else {
+                        alert("Payment failed. Try again.");
+                        payBtn.textContent = "Book Now";
+                        payBtn.disabled = false;
+                    }
+                } catch (err) {
+                    console.error(err);
+                    alert("Something went wrong.");
+                    payBtn.textContent = "Book Now";
+                    payBtn.disabled = false;
+                }
+            });
+        });    
                     

@@ -1304,7 +1304,8 @@ body footer {
   overflow-x: hidden;
   margin-bottom: 4rem;
 }
-.tour-booking-container .btn {
+.tour-booking-container button,
+.tour-booking-container a {
   text-decoration: none;
   text-transform: uppercase;
   background-color: #1c274c;

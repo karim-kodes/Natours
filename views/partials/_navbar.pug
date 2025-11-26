@@ -36,7 +36,7 @@
         if user
             .user-profile 
                 span= user.name.split(' ')[0]
-                img#profile-img(src=`/Images/Users/${user.photo  || 'default-profile.jpeg'}`, alt= `photo of ${user.name}`)
+                img#profile-img(src=`/images/Users/${user.photo  || 'default-profile.jpeg'}`, alt= `photo of ${user.name}`)
                 .user-profile-modal 
                     a(href="/me") Profile
                     a#logout-link(href="#")

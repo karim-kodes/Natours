@@ -1053,7 +1053,7 @@ body footer {
   max-width: fit-content;
   position: absolute;
   top: 30%;
-  left: 30%;
+  left: 8%;
   z-index: 2;
   /* text-align: center; */
 }

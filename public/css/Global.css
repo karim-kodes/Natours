@@ -1053,13 +1053,13 @@ body footer {
   max-width: fit-content;
   position: absolute;
   top: 30%;
-  left: 10%;
+  left: 30%;
   z-index: 2;
   /* text-align: center; */
 }
 
 .top-hero .top-hero-details h1 {
-  font-size: 14px;
+  font-size: 16px;
   /* max-width: fit-content; */
   text-align: center;
   background-color: #1c274c6b;
@@ -1084,12 +1084,12 @@ body footer {
 }
 
 .top-hero-icon i {
-  font-size: 12px;
+  font-size: 14px;
   color: #5dcad1;
 }
 
 .top-hero-icon span {
-  font-size: 15px;
+  font-size: 16px;
   color: #e2f2fb;
 }
 

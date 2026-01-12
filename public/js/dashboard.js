@@ -1,6 +1,12 @@
+// const { document } = require("pdfkit/js/page");
+
 const links = document.querySelectorAll(".tab-link");
 const tabContents = document.querySelectorAll(".tab-content");
 const mainHeading = document.querySelector(".main-header h3");
+
+function openModal() {
+  document.querySelector(".add-tour-modal").style.display = "flex";
+}
 
 links.forEach((link) => {
   link.addEventListener("click", (e) => {
@@ -48,53 +54,17 @@ dashLinks.forEach((dashlink) => {
   });
 });
 
-// ADDING TOUR FORM
-document
-  .getElementById("addTourForm")
-  .addEventListener("submit", async function (e) {
-    e.preventDefault(); // prevent page from reloading
-
-    const form = document.getElementById("addTourForm");
-    const formData = new FormData(form);
-
-    try {
-      const res = await fetch("/api/v1/tours", {
-        method: "POST",
-        body: formData,
-      });
-
-      const data = await res.json();
-
-      if (data.status === "success") {
-        alert("Tour created successfully!");
-
-        // Optionally refresh tours list
-        window.location.reload();
-      } else {
-        alert("Error creating tour: " + data.message);
-      }
-    } catch (err) {
-      console.log(err);
-      alert("Something went wrong");
-    }
-  });
-
 // PAGINATION
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("✅ Dashboard pagination script loaded");
-
   function setupPagination(tableId) {
     const table = document.getElementById(tableId);
     if (!table) {
-      console.warn(`❌ Table with ID "${tableId}" not found`);
       return;
     }
 
     const rows = table.querySelectorAll("tbody tr");
-    console.log(`📊 Table "${tableId}" found with ${rows.length} rows`);
 
     if (rows.length <= 10) {
-      console.log(`ℹ️ Table "${tableId}" has ≤10 rows — pagination skipped`);
       return;
     }
 
@@ -103,7 +73,6 @@ document.addEventListener("DOMContentLoaded", () => {
       ?.querySelector(".pagination");
 
     if (!paginationContainer) {
-      console.warn(`⚠️ No .pagination found for "${tableId}"`);
       return;
     }
 
@@ -116,8 +85,6 @@ document.addEventListener("DOMContentLoaded", () => {
     let currentPage = 1;
 
     function displayPage(page) {
-      console.log(`🔹 Showing page ${page} of ${totalPages} for ${tableId}`);
-
       rows.forEach((row, index) => {
         row.style.display =
           index >= (page - 1) * rowsPerPage && index < page * rowsPerPage
@@ -131,7 +98,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     prevBtn.addEventListener("click", () => {
-      console.log("btn xlixked");
       if (currentPage > 1) {
         currentPage--;
         displayPage(currentPage);
@@ -139,7 +105,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     nextBtn.addEventListener("click", () => {
-      console.log("btn clicked");
       if (currentPage < totalPages) {
         currentPage++;
         displayPage(currentPage);
@@ -157,56 +122,144 @@ document.addEventListener("DOMContentLoaded", () => {
   setupPagination("usersTable");
 });
 
+// EDITING TOUR ON THE ADMIN DASHBOARD
+document.addEventListener("click", async (e) => {
+  const editBtn = e.target.closest(".edit-btn");
+  if (!editBtn) return;
+
+  const tourId = editBtn.dataset.id;
+  console.log("Editing tour:", tourId);
+
+  try {
+    const res = await fetch(`/api/v1/tours/${tourId}`);
+    const data = await res.json();
+
+    const tour = data.data; // ✅ correct based on your API
+
+    // Fill form fields
+    document.getElementById("name").value = tour.name;
+    document.getElementById("price").value = tour.price;
+    document.getElementById("duration").value = tour.duration;
+    document.getElementById("location").value =
+      tour.startLocation?.description || "";
+    document.getElementsByName("difficulty")[0].value = tour.difficulty;
+    document.getElementsByName("maxGroupSize")[0].value = tour.maxGroupSize;
+    document.getElementById("summary").value = tour.summary;
+
+    const form = document.getElementById("addTourForm");
+    form.dataset.editing = tourId;
+
+    // 🔥 UPDATE MODAL UI
+    document.getElementById("modalTitle").textContent = "Update Tour";
+    document.getElementById("submitTourBtn").textContent = "Update Tour";
+
+    // Optional: remove image requirement when editing
+    document.getElementById("imageCover").required = false;
+    document.getElementById("images").required = false;
+
+    console.log("API response:", data);
+    console.log("Tour object:", tour);
+
+    openModal();
+  } catch (err) {
+    console.error("Error loading tour:", err);
+  }
+});
+
+// Submit Hnadler
+const form = document.getElementById("addTourForm");
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const isEditing = form.dataset.editing; // tourId if editing
+  const formData = new FormData(form);
+
+  // If editing, adjust request
+  let url = "/api/v1/tours";
+  let method = "POST";
+
+  if (isEditing) {
+    url = `/api/v1/tours/${isEditing}`;
+    method = "PATCH";
+
+    // Remove images if not updated
+    if (!form.imageCover.files.length) formData.delete("imageCover");
+    if (!form.images.files.length) formData.delete("images");
+
+    // Remove location to avoid MongoDB GeoJSON error
+    formData.delete("startLocation[description]");
+  }
+
+  try {
+    const res = await fetch(url, {
+      method,
+      body: formData,
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) throw new Error(data.message || "Something went wrong");
+
+    isEditing
+      ? showSuccess("Tour created  successfully!!", "success", () => {
+          window.location.reload();
+        })
+      : showSuccess("Tour added successfully!!", "success", () => {
+          window.location.reload();
+        });
+
+    // Clear edit mode
+    form.dataset.editing = "";
+    form.reset();
+
+    // Optional: reload page or update UI dynamically
+    window.location.reload();
+  } catch (err) {
+    console.error(err);
+    alert(err.message || "Something went wrong");
+  }
+});
+
 // DELETING TOUR FROM THE ADMIN DASHBOARD
 document.addEventListener("click", async (e) => {
   if (e.target.classList.contains("delete-btn")) {
     const tourId = e.target.dataset.id;
 
-    const confirmDelete = confirm("Are you sure you want to delete this tour?");
-    if (!confirmDelete) return;
+    // Use the reusable confirmation modal
+    showConfirm(
+      "Are you sure you want to delete this tour? This action cannot be undone.",
+      "Delete Tour?",
+      async () => {
+        // User clicked confirm - proceed with deletion
+        try {
+          const res = await fetch(`/api/v1/tours/${tourId}`, {
+            method: "DELETE",
+          });
 
-    try {
-      const res = await fetch(`/api/v1/tours/${tourId}`, {
-        method: "DELETE",
-      });
-
-      if (res.status === 204) {
-        alert("Tour deleted successfully");
-        location.reload(); // refresh table
-      } else {
-        alert("Failed to delete tour");
+          if (res.status === 204) {
+            showSuccess("Tour deleted successfully!", "Deleted", () => {
+              location.reload();
+            });
+          } else {
+            showError(
+              "Failed to delete tour. Please try again.",
+              "Delete Failed"
+            );
+          }
+        } catch (err) {
+          console.error(err);
+          showError(
+            "Error deleting tour. Please check your connection.",
+            "Error"
+          );
+        }
+      },
+      () => {
+        // User clicked cancel - do nothing
+        console.log("Delete cancelled");
       }
-    } catch (err) {
-      console.error(err);
-      alert("Error deleting tour");
-    }
-  }
-});
-
-// EDITING TOUR ON THE ADMIN DASHBOARD
-document.addEventListener("click", async (e) => {
-  if (e.target.classList.contains("edit-btn")) {
-    const tourId = e.target.dataset.id;
-
-    // Fetch the tour details
-    const res = await fetch(`/api/v1/tours/${tourId}`);
-    const data = await res.json();
-    const tour = data.data.tour;
-
-    // Fill the modal form with tour details
-    document.getElementById("name").value = tour.name;
-    document.getElementById("price").value = tour.price;
-    document.getElementById("duration").value = tour.duration;
-    document.getElementById("location").value =
-      tour.startLocation.description || "";
-    document.getElementsByName("difficulty")[0].value = tour.difficulty;
-    document.getElementsByName("maxGroupSize")[0].value = tour.maxGroupSize;
-    document.getElementById("summary").value = tour.summary;
-
-    // show modal in EDIT mode
-    document.getElementById("addTourForm").dataset.editing = tourId;
-
-    openModal();
+    );
   }
 });
 
@@ -299,9 +352,6 @@ const imageCoverInput = document.getElementById("imageCover");
 const coverPreview = document.getElementById("coverPreview");
 const imagesInput = document.getElementById("images");
 const imagePreview = document.getElementById("imagePreview");
-
-console.log(imagesInput);
-console.log(imagePreview);
 
 addTourBtn.addEventListener("click", () => {
   addTourModal.style.display = "flex";

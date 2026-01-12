@@ -96,7 +96,28 @@ exports.createTour = async (req, res, next) => {
 };
 
 exports.getTour = handlerFactory.getOne(Tour, { path: "reviews" });
-exports.updateTour = handlerFactory.updateOne(Tour);
+exports.updateTour = catchAsync(async (req, res, next) => {
+  // If no new image uploaded, remove image fields
+  if (!req.file && !req.files) {
+    delete req.body.imageCover;
+    delete req.body.images;
+  }
+
+  const tour = await Tour.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+    runValidators: true,
+  });
+
+  if (!tour) {
+    return next(new AppError("No tour found with that ID", 404));
+  }
+
+  res.status(200).json({
+    status: "success",
+    data: tour,
+  });
+});
+
 exports.deleteTour = handlerFactory.deleteOne(Tour);
 
 // Getting Tour STATS

@@ -15,6 +15,7 @@ const userRoutes = require("./routes/userRoutes");
 const reviewRoutes = require("./routes/reviewRoutes");
 const bookingRoutes = require("./routes/bookingRoutes");
 const paymentRoutes = require("./routes/paymentRoutes");
+const contactRouter = require("./routes/contactRoutes");
 const viewsRoutes = require("./routes/viewsRoutes");
 const app = express();
 
@@ -139,6 +140,7 @@ app.use("/api/v1/tours", tourRoutes);
 app.use("/api/v1/users", userRoutes);
 app.use("/api/v1/reviews", reviewRoutes);
 app.use("/api/v1/bookings", bookingRoutes);
+app.use("/api/v1", contactRouter);
 app.use("/api/payments", paymentRoutes);
 
 // app.get("/test", (req, res) => {

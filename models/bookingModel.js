@@ -23,14 +23,23 @@ const bookingSchema = new mongoose.Schema({
     type: Boolean,
     default: true,
   },
+  reference: {
+    type: String,
+    unique: true,
+  },
+});
+
+// Pre-find middleware - must be BEFORE model creation
+bookingSchema.pre(/^find/, function (next) {
+  this.populate({
+    path: "user",
+    select: "name email photo",
+  }).populate({
+    path: "tour",
+    select: "name duration imageCover startDates maxGroupSize",
+  });
+  next();
 });
 
 const Booking = mongoose.model("Booking", bookingSchema);
 module.exports = Booking;
-
-bookingSchema.pre(/^find/, function (next) {
-  this.populate("user").populate({
-    path: "user",
-    select: "name",
-  });
-});

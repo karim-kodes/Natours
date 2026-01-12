@@ -22,6 +22,10 @@ router.get(
   viewsController.getCheckout
 );
 router.get("/tours", viewsController.getToursPage);
-router.get("/me", viewsController.getMe);
+router.get(
+  "/me",
+
+  viewsController.getMe
+);
 
 module.exports = router;

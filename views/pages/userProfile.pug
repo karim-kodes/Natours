@@ -9,6 +9,7 @@ html(lang="en")
         link(rel="stylesheet", href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap")
 
         link(rel="icon", type="image/png", sizes="40x40", href="/images/Natours-fav-icon-32.png")
+        script(defer src="/js/modal.js")
         script(defer, src="/js/dashboard.js")
         script(src="https://cdn.jsdelivr.net/npm/axios@1.6.6/dist/axios.min.js")
         script(type="module", defer, src="/js/updateSettings.js")
@@ -43,14 +44,20 @@ html(lang="en")
                 section.user-bookings.user-section.user-section-active#myBookings
                     h2 My bookings 
                     .card-container
-                        each booking in bookings 
-                            .card
-                                h3= booking.tour.name
-                                p Amount: 
-                                    span= booking.price + "ksh"
-                                p Booked on: 
-                                    span= booking.createdAt.toDateString()
-                                a(href=`/tour/${booking.tour.slug}`)  View Tour
+                        if bookings && bookings.length > 0
+                            each booking in bookings 
+                                .card
+                                    h3= booking.tour.name
+                                    p Amount: 
+                                        span= booking.price + "ksh"
+                                    p Status:
+                                        span(class=booking.paid ? 'paid-status' : 'pending-status')= booking.paid ? '✓ Paid' : 'Pending'
+                                    p Booked on: 
+                                        span= booking.createdAt.toDateString()
+                                    a(href=`/tour/${booking.tour.slug}`)  View Tour
+                        else
+                            p.no-bookings You haven't booked any tours yet.
+                            a.btn.btn--green(href='/tours') Browse Tours
                        
                 section.user-bookings.user-section#myReviews
                     h2 My Reviews 
@@ -88,8 +95,9 @@ html(lang="en")
                                 label.form-label Email 
                                 input.form-input(type="email", name="email", value= user.email)
                             .form-group-user.profile 
-                                img(src=user.name ? `/images/Users/${user.photo}` : "images/Users/default-profile.jpeg", alt="user profile")
-                                a.profile-btn(href="") Choose new photo
+                                img#photoPreview(src=user.photo ? `/images/Users/${user.photo}` : "/images/Users/default-profile.jpeg", alt="user profile")
+                                input#photoInput(type="file", name="photo", accept="image/*", style="display: none")
+                                button.profile-btn(type="button") Choose new photo
 
                             button.form-btn(type="submit") Update Settings
                     hr

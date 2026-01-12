@@ -9,7 +9,8 @@ html(lang="en")
         link(rel="stylesheet", href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap")
 
         link(rel="icon", type="image/png", sizes="40x40", href="/images/Natours-fav-icon-32.png")
-        script(defer, src="/js/dashboard.js")
+        script(defer src="/js/modal.js")
+        script(defer src="/js/dashboard.js")
 
     body
         mixin overviewCard(title, icon, value, percent)
@@ -230,7 +231,7 @@ html(lang="en")
                                         td 
                                             span.published Published
                                         td.actions 
-                                            i.fa-solid.fa-pen(data-id=tour._id) 
+                                            i.fa-solid.fa-pen.edit-btn(data-id=tour._id) 
                                             i.fa-solid.fa-trash.delete-btn(data-id=tour._id)      
                         .pagination 
                             span page 1 of 3
@@ -245,7 +246,7 @@ html(lang="en")
                         .add-tour-modal.modal-overlay 
                             .modal 
                                 .modal-header 
-                                    h2 Add New Tour 
+                                    h2#modalTitle Add New Tour 
                                     span#closeModal.close-btn 
                                         i.fa-solid.fa-close
                                 form(id="addTourForm", class="modal-form", enctype="multipart/form-data")
@@ -260,7 +261,7 @@ html(lang="en")
                                         input(type="text", id="duration", name="duration", placeholder="Enter Duration", required) 
                                     .form-group 
                                         label(for="location") Location 
-                                        input(type="text", id="location", name ="location", placeholder="Enter Location", required)
+                                        input(type="text", id="location", name ="startLocation[description]", placeholder="Enter Location", )
                                     .form-group 
                                         label(for="difficulty") Difficulty
                                         select(name="difficulty", required)
@@ -275,13 +276,13 @@ html(lang="en")
                                         textarea(id ="summary", name="summary", rows="3" placeholder="Short Tour Summary.....", required)
                                     .form-group.col-span 
                                         label(for="imageCover") Cover Image 
-                                        input(type="file", id="imageCover", name="imageCover", accept= "image/*", required)
+                                        input(type="file", id="imageCover", name="imageCover", accept= "image/*",)
                                         .image-preview#coverPreview 
                                     .form-group.col-span 
                                         label(for="images") Tour Images (select 3)    
-                                        input(type="file", id="images", name="images", multiple accept="image/*", required)
+                                        input(type="file", id="images", name="images", multiple accept="image/*",)
                                         .image-preview#imagePreview 
-                                    button(type="submit", class="submit-btn") Create Tour
+                                    button(type="submit", class="submit-btn" id= "submitTourBtn") Create Tour
                 section.reviews.tab-content#reviews
                     .reviews-container 
                         .bookings-top 

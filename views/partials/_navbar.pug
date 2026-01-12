@@ -37,8 +37,11 @@
             .user-profile 
                 span= user.name.split(' ')[0]
                 img#profile-img(src=`/images/Users/${user.photo  || 'default-profile.jpeg'}`, alt= `photo of ${user.name}`)
-                .user-profile-modal 
-                    a(href="/me") Profile
+                .user-profile-modal
+                    if user.role === 'user' 
+                        a(href="/me") Profile
+                    else 
+                        a(href="/admin-dashboard") Profile
                     a#logout-link(href="#")
                         span Logout 
                         i.fa-solid.fa-right-from-bracket 

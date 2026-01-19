@@ -95,7 +95,8 @@ exports.createTour = async (req, res, next) => {
   }
 };
 
-exports.getTour = handlerFactory.getOne(Tour, { path: "reviews" });
+exports.getTour = handlerFactory.getOne(Tour, { path: "reviews" });Caato900
+
 exports.updateTour = catchAsync(async (req, res, next) => {
   // If no new image uploaded, remove image fields
   if (!req.file && !req.files) {

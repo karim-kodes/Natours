@@ -60,13 +60,13 @@ document.querySelector(".form").addEventListener("submit", (e) => {
   }
 
   // Name must contain only letters and spaces
-  const nameRegex = /^[A-Za-z\s]+$/;
-  if (!nameRegex.test(name)) {
-    errorToast.style.display = "flex";
-    errorMessage.textContent = "Name can only contain letters and spaces!";
-    nameInput.classList.add("input-error");
-    return;
-  }
+  // const nameRegex = /^[A-Za-z\s]+$/;
+  // if (!nameRegex.test(name)) {
+  //   errorToast.style.display = "flex";
+  //   errorMessage.textContent = "Name can only contain letters and spaces!";
+  //   nameInput.classList.add("input-error");
+  //   return;
+  // }
 
   // Basic email validation
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
